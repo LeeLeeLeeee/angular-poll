@@ -1,0 +1,86 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+:host {
+    width:100%;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    height: 100%;
+}
+
+.login-body {
+    height: 100%;
+    padding: 1.3em;
+    display:flex;
+    flex-direction: column;
+}
+
+.login-body > .signin-label {
+    margin: 0px;
+    font-size: 2.5vw;
+    padding:0.3em;
+    font-weight: 800;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+.login-body > .signup-label {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: 200;
+    padding: .3em;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    padding: .3em;
+    margin-top: auto;
+    position: relative;
+}
+
+.signin-form .separation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1.3em;
+    padding-bottom: 1.3em;
+}
+
+.signin-form  span {
+    color: #6f6f6f;
+    font-weight: 400;
+    padding:.3em
+}
+
+.signin-form .input {
+    margin-bottom: 1.3em;
+}
+
+.signin-form > form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-form .separation * {
+    flex:1 1 100% !important;
+    text-align: center;
+    color: rgb(122, 126, 131)
+}
+
+.signin-form .separation .line {
+    border-bottom: 1px solid rgb(226,232,240);
+}
+
+.login-btn {
+    color: #1b1c1d;
+    height: 45px;
+}

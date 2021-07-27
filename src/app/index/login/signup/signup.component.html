@@ -1,0 +1,48 @@
+<div class="login-body">
+    <p class="signin-label">
+        Sign up
+    </p>
+    <div class="signin-form">
+        <form [formGroup]="userForm" (ngSubmit)="signUpUser(userForm)" novalidate>
+            <div class="separation">
+                <div class="line"></div>
+                <div class="label">Write Sign-Info</div>
+                <div class="line"></div>
+            </div>
+            <span>Email address </span>
+            <div class="ui left icon input" [ngClass]="{'error': formError.user_id }">
+                <input type="text" placeholder="xxx@xxx.xxx" formControlName="user_id" >
+                <i class="envelope outline icon"></i>
+                <i class="exclamation triangle icon error-icon"></i>
+            </div>
+            <div formGroupName="passwordGroup" style="display: flex;flex-direction: column;">
+                <span>Password <small> (Password must be 8 characters or more) </small> </span>
+                <div class="ui left icon input" [ngClass]="{'error': pwValidStatus}">
+                    <input type="password" placeholder="password" formControlName="password">
+                    <i class="key icon"></i>
+                    <i class="exclamation triangle icon error-icon"></i>
+                </div>
+                <span>Confirm Password </span>
+                <div class="ui left icon input" [ngClass]="{'error': pwValidStatus}">
+                    <input type="password"  placeholder="Confirm password" formControlName="confirm_password" >
+                    <i class="key icon"></i>
+                    <i class="exclamation triangle icon error-icon"></i>
+                </div>
+            </div>
+            <span>First Name </span>
+            <div class="ui left icon input" [ngClass]="{'error': formError.first_name}">
+                <input type="text" formControlName="first_name" placeholder="First name">
+                <i class="info circle icon"></i>
+                <i class="exclamation triangle icon error-icon"></i>
+            </div>
+
+            <span>Last Name </span>
+            <div class="ui left icon input" [ngClass]="{'error': formError.last_name}">
+                <input type="text" formControlName="last_name" placeholder="Last name">
+                <i class="info circle icon"></i>
+                <i class="exclamation triangle icon error-icon"></i>
+            </div>
+            <button type="submit" class="ui inverted olive button login-btn">Sign up</button>
+        </form>
+    </div>
+</div>

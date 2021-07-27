@@ -1,0 +1,39 @@
+<div class="login-body">
+    <p class="signin-label">
+        Sign in
+    </p>
+    <p class="signup-label">
+        Don't have an account? <a href="#" (click)="goToSignup($event)">Sign up</a>
+    </p>
+    
+    <div class="signin-form">
+        <form #loginForm="ngForm" (ngSubmit)="signInWithEmail(loginForm)" novalidate>
+        <div class="separation">
+            <div class="line"></div>
+            <div class="label">Write Sign-Info</div>
+            <div class="line"></div>
+        </div>
+        <span>Email address</span>
+        <div class="ui pointing below red basic label" *ngIf="signinClick.email">
+            Please Check your email address
+        </div>
+        <div class="ui left icon input" [ngClass]="{'error': signinClick.email}">
+            <input type="text" placeholder="Email address" name="user_id" ngModel #email="ngModel"
+                pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
+            <i class="envelope outline icon"></i>
+        </div>
+        
+        <span>Password</span>
+        <div class="ui pointing below red basic label" *ngIf="signinClick.password">
+            Your password must be 8 characters or more
+        </div>
+        <div class="ui left icon input" [ngClass]="{'error': signinClick.password}">
+            <input type="password" pattern="[a-zA-Z0-9]{8,}" placeholder="Password" name="password" ngModel #pass="ngModel" required>
+            <i class="key icon"></i>
+        </div>
+        
+        <button type="submit" class="ui inverted olive button login-btn">Sign in</button>
+        </form>
+    </div>
+
+</div>

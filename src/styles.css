@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "En-Noto";
+    src: url("./assets/font/Noto_Serif/NotoSerif-Regular.ttf");
+}
+
+@font-face {
+    font-family: "En-Noto-Bold";
+    src: url("./assets/font/Noto_Serif/NotoSerif-Bold.ttf");
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin:0px;
+    overflow: hidden;
+}
