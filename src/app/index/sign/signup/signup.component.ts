@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PasswordValidator } from 'src/app/shared/validator/password-validator';
+import { SignInForm } from '../signin/signin.component';
 
 export interface UserForm {
   user_id: string,
@@ -22,6 +23,7 @@ export interface FormType {
   user_id: boolean;
   first_name: boolean;
   last_name: boolean;
+  duplicated: boolean
 }
 
 @Component({
@@ -32,10 +34,12 @@ export interface FormType {
 export class SignupComponent implements OnInit {
   pwValidStatus: boolean = false;
   userForm: FormGroup;
+  modalClose: boolean = true;
   formError: FormType = {
     user_id: false,
     first_name: false,
     last_name: false,
+    duplicated: false,
   };
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {}
@@ -58,11 +62,11 @@ export class SignupComponent implements OnInit {
         {
           password: [
             '',
-            [Validators.required, Validators.pattern('[a-zA-Z0-9]{8,}')],
+            [Validators.required, Validators.pattern('[^ㄱ-ㅎ가-힣]{8,}')],
           ],
           confirm_password: [
             '',
-            [Validators.required, Validators.pattern('[a-zA-Z0-9]{8,}')],
+            [Validators.required, Validators.pattern('[^ㄱ-ㅎ가-힣]{8,}')],
           ],
         },
         { validators: PasswordValidator.match }
@@ -110,12 +114,34 @@ export class SignupComponent implements OnInit {
       requestForm['lastname'] = userForm.value.last_name
       this.authService
         .signUpService(requestForm)
-        .subscribe(msg => console.log(msg))
+        .subscribe( _ => 
+          {
+            this.modalClose = false
+          },
+          (res) => {
+            
+            if( res.error.error === "already exist" ) {
+              this.formError.duplicated = true;
+            }
+          }
+        )
     }
   }
 
   goToSignIn(e: MouseEvent) {
     e.preventDefault();
     this.router.navigate(['/login/signin']);
+  }
+
+  SignInSubmit(e: MouseEvent) {
+    e.preventDefault()
+    const passwordGroup = this.userForm.get('passwordGroup');
+    const signInForm : SignInForm = {
+      user_id: this.userForm.get('user_id').value,
+      password: passwordGroup.get('password').value
+    }
+    this.authService
+    .signInService(signInForm)
+    .subscribe(msg => console.log(msg))  
   }
 }

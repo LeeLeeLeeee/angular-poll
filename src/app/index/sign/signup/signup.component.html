@@ -3,6 +3,7 @@
         Sign up
     </p>
     <div class="signin-form">
+        <p>Back to <a href="#" (click)="goToSignIn($event)">Sign in</a></p>
         <form [formGroup]="userForm" (ngSubmit)="signUpUser(userForm)" novalidate>
             <div class="separation">
                 <div class="line"></div>
@@ -11,9 +12,12 @@
             </div>
             <span>Email address </span>
             <div class="ui left icon input" [ngClass]="{'error': formError.user_id }">
-                <input type="text" placeholder="xxx@xxx.xxx" formControlName="user_id" >
+                <input type="text" placeholder="xxx@xxx.xxx" formControlName="user_id">
                 <i class="envelope outline icon"></i>
                 <i class="exclamation triangle icon error-icon"></i>
+                <div class="duplicated-error" *ngIf="formError.duplicated" (click)="formError.duplicated = false">
+                    <span>Email has already existed</span>
+                </div>
             </div>
             <div formGroupName="passwordGroup" style="display: flex;flex-direction: column;">
                 <span>Password <small> (Password must be 8 characters or more) </small> </span>
@@ -24,7 +28,7 @@
                 </div>
                 <span>Confirm Password </span>
                 <div class="ui left icon input" [ngClass]="{'error': pwValidStatus}">
-                    <input type="password"  placeholder="Confirm password" formControlName="confirm_password" >
+                    <input type="password" placeholder="Confirm password" formControlName="confirm_password">
                     <i class="key icon"></i>
                     <i class="exclamation triangle icon error-icon"></i>
                 </div>
@@ -44,5 +48,20 @@
             </div>
             <button type="submit" class="ui inverted olive button login-btn">Sign up</button>
         </form>
+    </div>
+    <div class="ui massive message success-modal shadow-sm" [ngClass]="{'hidden': modalClose, 'visible': !modalClose}">
+        <div>
+            <i class="check icon"></i>
+            <div>SUCCESS</div>
+        </div>
+        <div>
+            <span>
+                Your account has been successfully created.
+                <a class="shadow-sm" href="#" (click)="SignInSubmit($event)" type="button">Continue</a>
+            </span>
+        </div>
+    </div>
+    <div class="wrapper" *ngIf="!modalClose">
+
     </div>
 </div>

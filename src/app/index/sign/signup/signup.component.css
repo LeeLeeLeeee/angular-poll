@@ -1,0 +1,207 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+:host {
+    width:100%;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    height: 100%;
+}
+
+.login-body {
+    height: 100%;
+    padding: 1.3em;
+    display:flex;
+    flex-direction: column;
+}
+
+.login-body > .signin-label {
+    margin: 0px;
+    font-size: 2.5vw;
+    padding:0.3em;
+    font-weight: 800;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+.login-body > .signup-label {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: 200;
+    padding: .3em;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    padding: .3em;
+    margin-top: auto;
+    position: relative;
+}
+
+.signin-form .separation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1.3em;
+    padding-bottom: 1.3em;
+}
+
+.signin-form  span {
+    color: #6f6f6f;
+    font-weight: 400;
+    padding:.3em
+}
+
+.signin-form .input {
+    margin-bottom: 1.3em;
+}
+
+.signin-form > form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.signin-form .separation * {
+    flex:1 1 100% !important;
+    text-align: center;
+    color: rgb(122, 126, 131)
+}
+
+.signin-form .separation .line {
+    border-bottom: 1px solid rgb(226,232,240);
+}
+
+.login-btn {
+    color: #1b1c1d;
+    height: 45px;
+}
+
+.error-icon {
+    position:absolute;
+    top:50% !important;
+    left:95% !important;
+    transform: translate(-50%, -50%) !important;
+    color:red;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    display: none;
+}
+
+.error > .error-icon {
+    display: inline-block;
+}
+
+.message {
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    border-radius: .5em;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0%;
+}
+
+.message.hidden {
+    display: none !important;
+}
+
+.message > div:nth-child(1) {
+    background-color: rgb(139 195 74);
+    color:white;
+    width: 100%;
+    height: 40%;
+    position: relative;
+    flex-grow: 1;
+}
+
+.message > div:nth-child(1) > .icon {
+    position: absolute;
+    top:70%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.message > div:nth-child(1) > div {
+    position: absolute;
+    top:83%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.message > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em;
+    font-size: 15px;
+    flex-grow: 1;
+}
+
+.message > div:nth-child(2) > span {
+    text-align: center;
+}
+
+.message > div:nth-child(2) > span > a{
+    background-color: rgb(139 195 74);
+    border:0px;
+    padding:.5em;
+    width:120px;
+    color:white;
+    border-radius: .5em;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.success-modal {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    height: 520px;
+    width: 350px;
+    z-index: 2;
+}
+
+.wrapper {
+    position: fixed;
+    top:0%;
+    left:0%;
+    width:100%;
+    height: 100%;
+    background-color: #1b1c1d5b;
+    z-index: 1;
+}
+
+.duplicated-error {
+    position: absolute;
+    top:50%;
+    left:0%;
+    width:100%;
+    height: 100%;
+    transform: translate(0, -50%);
+    color:black;
+    background-color: #ffc9c97a;
+    align-items: center;
+    justify-content: end;
+}
+
+.duplicated-error > span {
+    position: absolute;
+    top:50%;
+    right:5%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+}
+

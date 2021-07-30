@@ -1,6 +1,7 @@
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./sign/login.component";
 import { Routes } from "@angular/router";
 import { IndexComponent } from "./index.component";
+import { AuthGuard } from "../shared/services/auth-guard";
 
 export const IndexRoutes: Routes = [
   {

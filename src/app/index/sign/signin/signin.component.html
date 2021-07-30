@@ -28,7 +28,7 @@
             Your password must be 8 characters or more
         </div>
         <div class="ui left icon input" [ngClass]="{'error': signinClick.password}">
-            <input type="password" pattern="[a-zA-Z0-9]{8,}" placeholder="Password" name="password" ngModel #pass="ngModel" required>
+            <input type="password" pattern="[^ㄱ-ㅎ가-힣]{8,}" placeholder="Password" name="password" ngModel #pass="ngModel" required>
             <i class="key icon"></i>
         </div>
         
