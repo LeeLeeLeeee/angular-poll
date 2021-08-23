@@ -1,0 +1,7 @@
+<label (click)="toggleEvent.emit()" [ngClass]="toggleStatus ? 'active' : '' ">
+    <div class="toggle-line"></div>
+    <span class="toggle-content"></span>
+    <span class="toggle-label">
+        <ng-content></ng-content>
+    </span>
+</label>

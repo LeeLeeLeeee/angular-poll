@@ -1,0 +1,163 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$poll-server-primary: mat.define-palette(mat.$indigo-palette);
+$poll-server-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$poll-server-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$poll-server-theme: mat.define-light-theme((
+  color: (
+    primary: $poll-server-primary,
+    accent: $poll-server-accent,
+    warn: $poll-server-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($poll-server-theme);
+@import '/src/assets/scss/variable.scss';
+
+/* You can add global styles to this file, and also import other style files */
+$ring-offset-shadow: 0 0 #0000;
+$ring-shadow: 0 0 #0000;
+$shadow: 0 1px 3px 0 #0000001a,0 1px 2px 0 #0000000f;
+@mixin box-shadow {
+    box-shadow: $shadow;
+}
+
+
+
+@font-face {
+    font-family: 'Hahmlet';
+    src: url('./assets/font/Hahmlet/Hahmlet-Medium.ttf')
+}
+
+@font-face {
+    font-family: 'Hahmlet-Bold';
+    src: url('./assets/font/Hahmlet/Hahmlet-Bold.ttf')
+}
+
+@font-face {
+    font-family: "En-Noto";
+    src: url("./assets/font/Noto_Serif/NotoSerif-Regular.ttf");
+}
+
+@font-face {
+    font-family: "En-Noto-Bold";
+    src: url("./assets/font/Noto_Serif/NotoSerif-Bold.ttf");
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin:0px;
+    overflow: hidden;
+}
+
+.shadow-sm {
+    @include box-shadow()
+}
+
+.ab-center {
+    @include absolute-center()
+}
+
+.shadow-border {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+html, body { height: 100%; }
+
+.h100 {
+    height: 100% !important;
+}
+
+.h50 {
+    height: 50% !important;
+}
+
+.h25 {
+    height: 25% !important;
+}
+
+.op0 {
+    opacity: 0 !important;
+    z-index: -1 !important;
+}
+
+.op1 {
+    opacity: 1 !important;
+    z-index: 9 !important;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; position: relative;}
+body > .modal {
+    @include absolute-center();
+    background-color: white;
+    z-index:5;
+    border-radius: 1.25em;
+    display: flex;
+    flex-direction: column;
+    &.sm {
+        width: $horizon-width * 2;
+        height: $horizon-height * 2; 
+    }
+
+    &.md {
+        width: $horizon-width * 2.5;
+        height: $horizon-height * 2.5; 
+    }
+
+    &.lg {
+        width: $horizon-width * 3;
+        height: $horizon-height * 3; 
+    }
+
+    & > div:nth-child(1) {
+        padding: 1.25em;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        & > i {
+            color:#5e5e5e;
+            cursor: pointer;
+            &:hover {
+                color:black;
+            }
+        }
+    }
+
+    &.hide {
+        
+        @include animation('scaleDown .5s ease-in forwards')
+    }
+        
+}
+
+body > .wrapper{
+    top:0%;
+    left:0%;
+    height: 100%;
+    width:100%;
+    z-index: 4;
+    position: absolute;
+    background-color: #eaeaea52;
+}

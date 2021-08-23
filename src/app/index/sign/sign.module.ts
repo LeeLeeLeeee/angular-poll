@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { LoginRoutes } from './login.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { RouterModule } from '@angular/router';
+import { SignRoutes } from './sign.routing';
 
 
 
@@ -12,9 +12,9 @@ import { SignupComponent } from './signup/signup.component';
   declarations: [SigninComponent, SignupComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(LoginRoutes),
     FormsModule,
+    RouterModule.forChild(SignRoutes),
     ReactiveFormsModule,
   ]
 })
-export class LoginModule { }
+export class SignModule { }

@@ -1,0 +1,12 @@
+<div class="paging-wrapper">
+    <div class="paging-info">
+        Results : {{ (page - 1) * pageSize + 1}} - {{ page * pageSize < totalCount ? page * pageSize : totalCount }} of {{ totalCount }}
+    </div>
+    <div class="paging-content">
+        <i class='angle double left icon' (click)="changePageWithDebouncing(1)"></i>
+        <i class='angle left icon' (click)="changePageWithDebouncing(page - 1 )"></i>
+        <input type="number" #pageInput class="shadow-border" [value]="page" (keydown)="keyDownPageHandler($event)"/>
+        <i class='angle right icon' (click)="changePageWithDebouncing(page + 1 )"></i>
+        <i class='angle double right icon' (click)="changePageWithDebouncing(lastPage)"></i>
+    </div>
+</div>

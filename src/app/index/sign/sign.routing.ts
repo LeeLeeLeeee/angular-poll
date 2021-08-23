@@ -1,20 +1,21 @@
 import { Routes } from "@angular/router";
-import { LoginComponent } from "./login.component";
+import { SignComponent } from "./sign.component";
 import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "./signup/signup.component";
 
 
-export const LoginRoutes: Routes = [
+export const SignRoutes: Routes = [
     {
-        path: "login",
-        component:LoginComponent,
+        path: "",
+        component:SignComponent,
         children: [
             {
-                path:"signin",
+                path:"",
                 component: SigninComponent
             },
             {
                 path:"signup",
+                
                 component: SignupComponent
             }
         ]

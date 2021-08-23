@@ -1,0 +1,316 @@
+@import '/src/assets/scss/variable.scss';
+
+
+
+@keyframes progress-animation {
+    0% {
+        width:15%;
+        left:0%;
+        opacity: .5;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    100% {
+        width:10%;
+        left:90%;
+        opacity: 0;
+    }
+}
+
+@keyframes rocket-animation {
+    20% {
+        transform: translate(-200%, 200%);
+    }
+
+    100% {
+        transform: translate(120%, -200%) rotate(-40deg);
+        // transform: rotate(-40deg);
+    }
+}
+
+.context-menu {
+    position: absolute;
+    padding:.25em;
+    border-radius: .525em;
+    z-index: 2;
+    background-color: white;
+
+    &.op0 {
+        transition: opacity .2s ease-in;
+    }
+
+    &.op1 {
+        transition: opacity .2s ease-out;
+    }
+    
+    & > div {
+        margin: .25em;
+        cursor: pointer;
+        padding:.125em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        transition: .2s ease-out;
+        & > i {
+            width:25px;
+            height:25px;
+            position: relative;
+            
+            &::before {
+                position: absolute;
+                top:50%;
+                left:50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &:nth-child(3):hover {
+            background-color: #ffecef;
+            color:#fd4a65;
+        }
+    }
+}
+
+.project-wrapper {
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: minmax(100px, auto) repeat(3, minmax(250px, auto)) minmax(100px, auto);
+    -ms-grid-column: minmax(100px, auto) repeat(3, minmax(250px, auto)) minmax(100px, auto);
+    grid-template-rows: repeat(5, 1fr);
+    -ms-grid-row: repeat(5, 1fr);
+    height: 100%;
+    font-size: 16px;
+    margin-top: .125em;
+
+    
+
+    & > section:nth-child(1) {
+        grid-column: 2 / 5;
+        grid-row: 1;
+        align-self: center;
+        padding: 1.25em;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+
+        & > div:nth-child(1) {
+            display: flex;
+            align-items: stretch;
+        }
+
+        & > div:nth-child(2) {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .search-input {
+            overflow: hidden;
+            & > i {
+                transition: transform .5s ease, opacity .2s ease-out;
+                cursor: pointer !important;
+                z-index: 3;
+            }
+        }
+
+        & .search {
+            
+            & > i.close {
+                transform: translate(0%, 100%);
+                opacity: 0;
+                z-index: -1;
+            }
+        }
+
+        & .close {
+            & > i.search {
+                transform: translate(0%, 100%);
+                opacity: 0;
+                z-index: -1;
+            }
+        }
+
+    }
+
+    & > section:nth-child(2) {
+        $card-size: 400px;
+        grid-column: 2 / 5;
+        grid-row: 2 / 6;
+        padding: .525em;
+        display: grid;
+        -ms-grid-column: repeat(3, $card-size);
+        grid-template-columns: repeat(3, $card-size);
+        -ms-grid-row: $card-size * 1.2 50px;
+        grid-template-rows: $card-size * 1.2 50px;
+        gap: 1em;
+        grid-auto-flow: dense;
+        align-items: stretch;
+        justify-content: center;
+        align-self: center;
+        & > .project-card {
+            border-radius: 1em;
+            padding: 1.25em;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Hahmlet';
+            & > .header {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                & > .menubar {
+                    height: 50px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-bottom: .525em;
+                    & > i {
+                        cursor: pointer;
+                    }
+                }
+                
+                .project-title {
+                    word-break: break-word;
+                }
+
+                .project-des {
+                    font-size: .9em;
+                    color: $text-secondary;
+                    flex:1;
+                    display: flex;
+                    flex-direction: row;
+                }
+            }
+
+            & > .content {
+                flex: 2;
+                color: $text-secondary;
+                font-size: .8em;
+            }
+
+            & > .footer {
+                flex: 1;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                position: relative;
+                & > .task-btn {
+                    display: flex;
+                    font-size: .9em;
+                    flex-direction: row;
+                    padding:.525em;
+                    border-radius: .25em;
+                    position: relative;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: background-color .2s ease-out;
+                    &:hover {
+                        background-color: #eeeeee;
+                        color:#3c3c3c;
+                    }
+
+                    & > i {
+                        width: 20px;
+                        height: 20px;
+                        position: relative;
+                        &::before {
+                            position: absolute;
+                            top:50%;
+                            left:50%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                }
+
+                & > .progress {
+                    display: flex;
+                    position: absolute;
+                    width:100%;
+                    height:7px;
+                    background-color:#eeeeee;
+                    padding:0px;
+                    top:0px;
+                    z-index: 1;
+                    & > span {
+                        background-color: #78aad2;
+                        position: relative;
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            height:100%;
+                            background-image: linear-gradient(.25turn, rgba(255, 255, 255, 0.289), rgba(255, 255, 255, 0.645));
+                            animation: progress-animation 2.2s cubic-bezier(0, 0, 0.09, 0.96) 0s infinite forwards normal;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        & > div.empty {
+            grid-template-columns: 2/3;
+            grid-column: 2/3;
+            grid-row:1/2;
+            grid-template-rows: 1/2;
+            align-self: center;
+            justify-self: center;
+            font-size: 1.25em;
+            overflow: hidden;
+            padding:1em;
+            &:hover {
+                & > i {
+                    @include animation('rocket-animation 1.7s cubic-bezier(0.97, 0, 0.25, 1) forwards')
+                }
+            }
+        }
+
+        .bottom-paging {
+            grid-column: 1 / 4;
+            grid-row: 2;
+        }
+    }
+}
+
+.delete-modal {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex:1;
+    & > div:nth-child(1) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        padding:1em;
+        color:#fd4a65
+    }
+
+    & > div:nth-child(2) {
+        @include korean-font();
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 1;
+        padding:1em;
+        font-weight: 600;
+    }
+
+    & > div:nth-child(3) {
+        @include korean-font();
+        position: absolute;
+        bottom:0%;
+        margin-bottom: 1.25em;
+        display: flex;
+        justify-content: space-between;
+        left:50%;
+        transform: translate(-50%, 0%);
+        
+        & > app-button:nth-child(1) {
+            margin-right:20px
+        }
+    }
+    
+}

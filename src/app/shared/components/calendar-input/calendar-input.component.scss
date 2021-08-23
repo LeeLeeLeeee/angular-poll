@@ -1,0 +1,221 @@
+@import '/src/assets/scss/variable.scss';
+
+
+
+:host {
+    flex:1    
+}
+
+.date-form {
+    display: flex;
+    position: relative;
+       
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color:#747474;
+    padding:.525em;
+    cursor: pointer;
+    font-size: .9em;
+    border-radius: .525em;
+    &:hover {
+        & > span:first-child {
+            &::after {
+                background-color: #9fd8af4f;
+                
+            }
+        }
+    }
+
+    & > div {
+        text-align: center;
+        flex: 1;
+    }
+    & > span:first-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center ;
+        width:20px;
+        height:20px;
+        position: relative;
+        &::after {
+            content: '';
+            @include absolute-center();
+            width:120%;
+            height: 120%;
+            z-index: 1;
+            border-radius: 20px;
+            transition: all .3s ease-out
+        }
+        & > i {
+            margin:0px;
+            position: relative;
+            color:rgb(16, 16, 16);
+            &::before {
+                @include absolute-center();
+                z-index:2
+            }
+        }
+    }
+    .calendar-body {
+        position: absolute;
+        cursor: default;
+        top:120%;
+        width:350px;
+        left: -.05em;
+        background-color: white;
+        z-index: 2;
+        padding:.825em;
+        border-radius: .25em;
+        display: none;
+        &.hide {
+            @include animation('fadeOut .3s ease-in forwards')
+            
+        }
+
+        &.show {
+            @include animation('fadeIn .3s ease-in forwards')
+        }
+        
+        & > .calendar-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            color:#424f65;
+
+
+            & > div:first-child {
+                min-width: 120px;                
+            }
+
+            & > div {
+                position: relative;
+                cursor: pointer;
+                padding: .25em;
+                
+                &.open {
+                    & > i {
+                        transition: transform .2s ease-out;
+                        transform: rotate(180deg) translate(0%, -5px);
+                    }
+                }
+
+                &.close {
+                    & > i {
+                        transition: transform .2s ease-out;
+                        transform: rotate(0deg) translate(0%, 0%);
+                    }
+                }
+
+                
+                & > .selector {
+                    list-style: none;
+                    position: absolute;
+                    background-color: white;
+                    z-index: 2;
+                    font-size: .8em;
+                    overflow-y: scroll;
+                    height: 125px;
+                    padding: .525em;
+                    opacity: 0;
+                    grid-template-columns: 1fr;
+                    grid-template-rows: repeat(12, 1fr) auto;
+                    gap: .25em;
+                    background-color: #eeeeee;
+                    width:100%;
+                    border-radius: .52em;
+                    display: grid;
+                    &.open {
+                        animation: reveal .2s ease-out forwards;
+                        z-index: 2;
+                    }
+
+                    &.close {
+                        animation: hide .2s ease-in forwards;
+                        z-index: -1;
+                    }
+                    & > li {
+                        border-radius: .52em;
+                        background-color: white;
+                        cursor: pointer;
+                        &.active {
+                            background-color:rgb(60, 60, 140);
+                            color:white;        
+                        }
+
+                        &:hover {
+                            background-color:rgb(137, 137, 206);
+                            color:white;
+                        }
+                    }
+                    &::after {
+                        content: "";
+                        display: block;
+                        height:.525em;
+                        width: 100%;
+                    }
+                    
+
+                    &::-webkit-scrollbar {
+                        width: 3px;
+                    }
+                }
+            }
+        }
+
+        & > .calendar-day-line {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding:.25em;
+            border-bottom:1px solid $text-secondary;
+            & > span {
+                color: $text-secondary;
+                font-size: .85em;
+                flex:1;
+            }
+        }
+        
+
+        & > .calendar-date {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: #eeeeee;
+            padding:3px;
+            &.week4 { grid-template-rows: repeat(4, 1fr); height: 45.75px * 4}
+            &.week5 { grid-template-rows: repeat(5, 1fr); height: 45.75px * 5}
+            &.week6 { grid-template-rows: repeat(6, 1fr); height: 45.75px * 6}
+            gap:3px;
+            & > span {
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-end;
+                border-radius: .25em;
+                cursor: pointer;
+                transition: background-color, transform .2s ease-out;
+                
+                
+                & > span {
+                    padding: .25em;
+                }
+                &:hover {
+                    background-color:rgb(137, 137, 206);
+                    color:white;
+                }
+                &.today {
+                    background-color:rgb(60, 60, 140);
+                    color:white;
+                }
+                &.blanck {
+                    background-color: #eeeeee;
+                }
+                &:active {
+                    transform: scale(97%);
+                }
+            }
+        }
+    }
+}

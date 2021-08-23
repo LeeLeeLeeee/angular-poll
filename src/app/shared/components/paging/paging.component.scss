@@ -1,0 +1,45 @@
+.paging-wrapper {
+    padding: .25em;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8em;
+    color:#676767;
+
+    & > .paging-content {
+        font-size: 21px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button
+        {
+            -moz-appearance: none; 
+            appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"] {
+            width: 49px;
+            height:30px;
+            border:0px;
+            border-radius: 3px;
+            text-align: center;
+            box-shadow: inset 3px 3px 3px 0 rgb(0 0 0 / 11%);
+            font-size: 16px;
+            font-weight: 600;
+            &:focus {
+                outline: none;
+            }
+        }
+
+        i {
+            cursor: pointer;
+        }
+    }
+}
+
+
+

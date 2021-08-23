@@ -1,0 +1,47 @@
+<section class="project-wrapper" [ngClass]="{'success' : success}">
+
+    <section insideFormInput class="shadow-border create-form">
+        <div class="header-title">
+            Create Project
+        </div>
+        <div class="content">
+            <div>
+                <form [formGroup]="projectForm">
+                    <app-input [error]="!!errorList.title" [errorTitle]="errorText?.title || ''"
+                        [parentGroup]="projectForm" [controlerName]="'title'" [titleText]="'Title'" [required]="true">
+                    </app-input>
+                    <app-input [error]="!!errorList.from" [errorTitle]="errorText?.from || ''"
+                        [parentGroup]="projectForm" [controlerName]="'from'" [inputType]="'date'" [titleText]="'From'"
+                        [required]="true"></app-input>
+                    <app-input [error]="!!errorList.to" [errorTitle]="errorText?.to || ''" [parentGroup]="projectForm"
+                        [controlerName]="'to'" [inputType]="'date'" [titleText]="'To'" [required]="true"></app-input>
+                    <app-input [parentGroup]="projectForm" [controlerName]="'description'" [titleText]="'Description'">
+                    </app-input>
+                    <app-input [parentGroup]="projectForm" [controlerName]="'participant'"
+                        [titleText]="'Add participant'" [titleIcon]="['user', 'plus']"></app-input>
+                </form>
+            </div>
+            <div>
+                <app-button (click)="formSubmit($event)">
+                    CREATE PROJECT
+                </app-button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <i class="thumbs up outline icon"></i>
+        <div>
+            프로젝트 생성에 성공하였습니다.
+        </div>
+        <div>
+            <app-button class="w100 primary" (click)="createAgain()">
+                추가 생성
+            </app-button>
+        </div>
+        <div (click)="backToProject()">
+            프로젝트 화면으로
+        </div>
+
+    </section>
+
+</section>

@@ -1,1 +1,15 @@
-<p>side-menu works!</p>
+<div class="side-menu" [ngClass]="sideMenuToggle ? 'on' : 'off'">
+    <i class="apple icon logo"></i>
+    <section class="menu-btn" [ngClass]="sideMenuToggle ? 'on' : 'off'">
+        <div (click)="menuClick('dashboard')" [ngClass]="menu === 'dashboard'   ? 'active' : ''"><i class="archive icon"></i> <span class="menu-text" [ngClass]="sideMenuToggle ? 'on' : 'off'">Dashboard</span></div>
+        <div (click)="menuClick('project')" [ngClass]="menu === 'project'     ? 'active' : ''"><i class="clipboard icon"></i><span class="menu-text" [ngClass]="sideMenuToggle ? 'on' : 'off'">Project</span></div>
+        <div (click)="menuClick('analysis')" [ngClass]="menu === 'analysis'    ? 'active' : ''"><i class="chart area icon"></i><span class="menu-text" [ngClass]="sideMenuToggle ? 'on' : 'off'">Analysis</span></div>
+        <div (click)="menuClick('schedule')" [ngClass]="menu === 'schedule'    ? 'active' : ''"><i class="calendar icon"></i><span class="menu-text" [ngClass]="sideMenuToggle ? 'on' : 'off'">Schedule</span></div>
+        <div (click)="menuClick('taskManage')" [ngClass]="menu === 'taskManage'  ? 'active' : ''"><i class="check square icon"></i> <span class="menu-text" [ngClass]="sideMenuToggle ? 'on' : 'off'">Tasks-manage</span></div>
+    </section>
+    <section class="bottom-side">
+        <div> <i class="bell outline icon"> <span>5</span> </i> </div>
+        <div> <i class="user circle outline icon"> <span></span></i> </div>
+        <div data-tooltip="Sign out" data-position="right center"> <i class="sign-out icon"> </i></div>
+    </section>
+</div>

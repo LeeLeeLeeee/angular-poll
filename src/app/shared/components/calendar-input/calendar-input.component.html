@@ -1,0 +1,45 @@
+<ng-content></ng-content>
+<div class="date-form" >
+    {{ selectedDate || 'Select date'}}
+    <span [ngClass]="contolerName + '-btn'" (click)="toggleCalendar()"><i class="calendar outline icon"></i></span>
+    <div #calendarBody class="calendar-body shadow-sm" [ngClass]="isCalendarOn ? 'show' : 'hide' ">
+        <div class="calendar-header">
+            <div (click)="choiceMonth($event)" [ngClass]="isMonth ? 'open' : 'close'">
+                {{ calendarInfo.month | month:'long' }} <i class="angle down icon"></i>
+                <ul class="selector shadow-sm" [ngClass]="isMonth ? 'open' : 'close' ">
+                    <li (click)="changeMonth(mon)" class="shadow-border" [ngClass]="{'active' : calendarInfo.month === mon}"  *ngFor="let mon of monthList();">
+                        {{mon | month:'long'}}
+                    </li>
+                </ul>
+            </div>
+            <div (click)="choiceYear($event)" [ngClass]="isYear ? 'open' : 'close'">
+                {{calendarInfo.year}} <i class="angle down icon" ></i>
+                <ul class="selector shadow-sm"  [ngClass]="isYear ? 'open' : 'close'">
+                    <li (click)="changeYear(year)" class="shadow-border" [ngClass]="{'active' : calendarInfo.year === year}"  *ngFor="let year of yearList();">
+                        {{year}}
+                    </li>
+                </ul>
+            </div>
+            <div></div>
+            <div  (click)="toggleCalendar()"><i class="close icon"></i></div>
+        </div>
+        <div class="calendar-day-line">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+        </div>
+        <div class="calendar-date"
+            [ngClass]="calendarInfo.weekCnt === 4 ? 'week4' : calendarInfo.weekCnt === 5 ? 'week5' : 'week6'">
+            <span class="blanck" *ngFor="let _ of blanckDateStart();"></span>
+            <span (click)="choiceDate(date)" class="shadow-border" *ngFor="let date of realDate(); let i = index"
+                [ngClass]="{ 'today' : checkToday(date) }">
+                <span>{{date}}</span>
+            </span>
+            <span class="blanck" *ngFor="let _ of blanckDateLast();"></span>
+        </div>
+    </div>
+</div>

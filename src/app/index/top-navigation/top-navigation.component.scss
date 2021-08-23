@@ -1,0 +1,85 @@
+@keyframes extension {
+    from {
+        width: 250px;
+    }
+
+    to {
+        width: 600px
+    }
+}
+
+.top-menu-bar {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5em;
+    & > button {
+        margin-left:25px;
+        color:#6a6a6a
+    }
+
+    .search-bar {
+        margin-left: 25px;
+        height: 100%;
+        padding: .5em;
+        
+        & > div {
+            height: 100%;
+            border-radius: 500px;
+            padding: .5em;
+            & > input { 
+                height: 100%;
+                font-size: 18px;
+                &:focus {
+                    animation: extension .5s ease-out .0s forwards;
+                }
+            }
+            & > i {
+                left: 10px !important;
+            }
+        }
+
+
+    }
+
+    .user-profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 15px;
+        & > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: .5em;
+            min-width: 150px;
+        }
+        &  i {
+            font-size: 20px;
+            margin-right:10px
+        }
+    }
+}
+
+.top-navigation-bar {
+    padding: .5em;
+    display: flex;
+    flex-direction: row;
+    & > i {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    & > div > span {
+        margin-right: 8px;
+        color:#254d8d;
+        cursor: pointer;
+    }
+
+    & > div > i {
+        font-size: 12px;
+    }
+}
+

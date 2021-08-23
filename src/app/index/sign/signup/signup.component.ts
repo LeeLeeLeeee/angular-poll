@@ -16,7 +16,6 @@ export interface UserForm {
   lastname: string,
   login_count: number,
   is_superuser: boolean
-
 }
 
 export interface FormType {
@@ -29,7 +28,7 @@ export interface FormType {
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   pwValidStatus: boolean = false;
@@ -130,7 +129,7 @@ export class SignupComponent implements OnInit {
 
   goToSignIn(e: MouseEvent) {
     e.preventDefault();
-    this.router.navigate(['/login/signin']);
+    this.router.navigate(['/sign']);
   }
 
   SignInSubmit(e: MouseEvent) {
@@ -142,6 +141,13 @@ export class SignupComponent implements OnInit {
     }
     this.authService
     .signInService(signInForm)
-    .subscribe(msg => console.log(msg))  
+    .subscribe(_ => 
+      {
+        this.router.navigate(['/'])
+      },
+      (res) => {
+
+      }
+    )
   }
 }

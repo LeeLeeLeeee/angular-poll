@@ -1,0 +1,31 @@
+<div class="input-wrapper" [ngClass]="isLeftTitle ? 'left' : 'right'">
+    <span *ngIf="titleText !== ''">
+        <i *ngIf="titleIcon.length > 0" [ngClass]="titleIcon" class="icon"></i>
+        <span *ngIf="required" class="required-sign"></span>
+        {{titleText}} 
+        <span class="popup" [attr.data-tooltip]="errorTitle" data-position="top left">
+            <i class="exclamation triangle icon error-icon"  *ngIf="error"></i>
+        </span>
+        
+    </span>
+    <div class="shadow-border" [ngClass]="{'error' : error}">
+        <span *ngIf="leftText != ''">
+            <i *ngIf="leftIcon.length > 0" [ngClass]="leftIcon" class="icon"></i>
+            {{leftText}}
+        </span>
+        <section [formGroup]="inputGroup" [ngSwitch]="inputType">
+            <input [formControlName]="controlerName" [placeholder]="titleText" *ngSwitchCase="'text'" type="text" />
+            <input [formControlName]="controlerName" [placeholder]="titleText"  *ngSwitchCase="'number'" type="text" />
+            <textarea [formControlName]="controlerName" *ngSwitchCase="'textarea'" type="text"></textarea>
+            <app-calendar-input *ngSwitchCase="'date'" [parentForm]="inputGroup" >
+                <input type="hidden" #hiddenInput [name]="controlerName" [formControlName]="controlerName"/>
+            </app-calendar-input>
+            <input [formControlName]="controlerName" [placeholder]="titleText"  *ngSwitchDefault type="text" />
+
+        </section>
+        <span *ngIf="leftText != ''">
+            <i *ngIf="rightIcon.length > 0" [ngClass]="rightIcon" class="icon"></i>
+            {{rightText}}
+        </span>
+    </div>
+</div>

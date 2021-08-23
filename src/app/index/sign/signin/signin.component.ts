@@ -18,7 +18,7 @@ export interface SignInValidator {
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
   signinClick : SignInValidator;
@@ -34,7 +34,7 @@ export class SigninComponent implements OnInit {
 
   goToSignup(e: MouseEvent) {
     e.preventDefault()
-    this.router.navigate(["/login/signup"])
+    this.router.navigate(["/sign/signup"])
   }
 
   signInWithEmail(loginForm: NgForm) {

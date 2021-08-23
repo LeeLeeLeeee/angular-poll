@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { SignInForm } from 'src/app/index/login/signin/signin.component';
-import { UserForm } from 'src/app/index/login/signup/signup.component';
+import { SignInForm } from 'src/app/index/sign/signin/signin.component';
+import { UserForm } from 'src/app/index/sign/signup/signup.component';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -24,6 +24,12 @@ export class AuthService {
     return this.httpClient.post<UserForm>(`${environment.apiAddres}/v1/user`, userForm, {
       withCredentials: true
     })
+  }
+
+  getAccessToken() : Promise<any> {
+    return this.httpClient.get<any>(`${environment.apiAddres}/auth/checkToken`,{
+      withCredentials: true
+    }).toPromise()
   }
 
   getToken() : string {

@@ -1,0 +1,94 @@
+<span #contextMenuElement class="context-menu shadow-border" [ngClass]="contextMenu ? 'op1' : 'op0'">
+    <div><i class="edit icon"></i> Edit</div>
+    <div><i class="chart pie icon"></i> Analysis</div>
+    <div (click)="openModal()"><i class="trash alternate icon"></i> Delete</div>
+</span>
+<div class="project-wrapper">
+    <section>
+        <div>
+            <button class="ui labeled icon button teal h100 shadow-sm" (click)="goToAdd()">
+                <i class="plus icon"></i>
+                Add Project
+            </button>
+            <div class="ui large icon input shadow-sm search-input"
+                [ngClass]="filter.projectTitle == '' ? 'search' : 'close' ">
+                <input type="text" placeholder="Search to title" [value]="filter.projectTitle"
+                    (keyup)="projectSelect($event)">
+                <i class="search icon link"></i>
+                <i (click)="clearProject()" class="close icon link"></i>
+            </div>
+        </div>
+        <div>
+            <app-toggle (toggleEvent)="changeToggleStatus()" [toggleStatus]="toggleStatus">
+
+                Hide completed
+            </app-toggle>
+        </div>
+    </section>
+    <section>
+        <ng-container *ngIf="!!projectLists.length; else emptyBlock">
+            <div class="project-card shadow-border"
+                *ngFor="let project of projectLists; let i=index; trackBy: trackById">
+                <div class="header">
+                    <div class="menubar" (click)="openMenu($event, project.id)">
+                        <i class="icon bars menu-btn"></i>
+                    </div>
+                    <p class="project-title">
+                        {{project.projectTitle}}
+                    </p>
+                    <div class="project-des" *ngIf="project.projectDescription !== ''">
+                        <i class="question icon"></i>
+                        <p>
+                            {{project.projectDescription}}
+                        </p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>
+                        <i class="clock outline icon"></i>
+                        {{project.startDate | date:'YYYY/MM/dd'}} ~ {{project.endDate | date:'YYYY/MM/dd' }}
+                    </p>
+                    <p>
+                        <i class="clipboard icon"></i>
+                        Survey Status
+                    </p>
+                </div>
+                <div class="footer">
+                    <div class="progress">
+                        <span style="width:50%">
+                        </span>
+                    </div>
+                    <div class="shadow-border task-btn">
+
+                        <i class="arrow right icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-paging">
+                <app-paging (changePage)="changePage($event)" [page]="page" [pageSize]="pageSize" [lastPage]="lastPage"
+                    [totalCount]="totalCount"></app-paging>
+            </div>
+        </ng-container>
+    </section>
+    <ng-template #emptyBlock>
+        <div class="empty">
+            <i class="icon rocket"></i>
+            No projects
+        </div>
+    </ng-template>
+    <section style="display: none;">
+        <div class="delete-modal" #deleteModal>
+            <div>
+                <i class="trash alternate outline icon"></i>
+            </div>
+            <div>
+                프로젝트를 삭제하시면 복구할 수 없습니다.<br />
+                그래도 삭제하시겠습니까?
+            </div>
+            <div>
+                <app-button (click)="deleteProject($event)">취소</app-button>
+                <app-button (click)="deleteProject($event)" class="danger">삭제</app-button>
+            </div>
+        </div>
+    </section>
+</div>

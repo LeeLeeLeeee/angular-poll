@@ -1,0 +1,60 @@
+$text-secondary: rgb(100,116,139);
+$vertical-width: 100px;
+$vertical-height: 160px;
+$horizon-width: 160px;
+$horizon-height: 100px;
+
+
+@mixin absolute-center {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin korean-font {
+    font-family: "Hahmlet", Arial, Helvetica, sans-serif;
+}
+
+@mixin english-font {
+    font-family: "En-Noto", Arial, Helvetica, sans-serif;
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+    
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+    
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+
+@keyframes rollOpen {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes rollDown {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

@@ -7,12 +7,16 @@ import { AuthGuard } from './shared/services/auth-guard';
 const routes: Routes = [
   {
     path:'',
-    component:AppComponent,
+    component:AppComponent,    
     children: [
       {
         path:'',
-        canActivate:[AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./index/index.module').then(m => m.IndexModule)
+      },
+      {
+        path: "sign",
+        loadChildren: () => import('./index/sign/sign.module').then(m => m.SignModule)
       }
     ]
   },
