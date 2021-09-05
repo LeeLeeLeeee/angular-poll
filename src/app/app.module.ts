@@ -10,25 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignComponent } from './index/sign/sign.component';
 import { SignModule } from './index/sign/sign.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProjectComponent } from './layouts/project/project.component';
 import { AnalysisComponent } from './layouts/analysis/analysis.component';
 import { ScheduleComponent } from './layouts/schedule/schedule.component';
 import { TaskManageComponent } from './layouts/task-manage/task-manage.component';
-import { ListComponent } from './layouts/project/list/list.component';
-import { AddComponent } from './layouts/project/add/add.component';
-import { EditComponent } from './layouts/project/edit/edit.component';
+import { ProjectModule } from './layouts/project/project.module';
+import { ProjectComponent } from './layouts/project/project.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SignComponent,
-    ProjectComponent,
     AnalysisComponent,
     ScheduleComponent,
     TaskManageComponent,
-    ListComponent,
-    AddComponent,
-    EditComponent,
+    
   ],
   imports: [
     AppRoutingModule,
@@ -40,6 +36,7 @@ import { EditComponent } from './layouts/project/edit/edit.component';
     HttpClientModule,
     SignModule,
     BrowserAnimationsModule,
+    ProjectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

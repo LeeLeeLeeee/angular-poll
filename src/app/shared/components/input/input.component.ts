@@ -1,6 +1,7 @@
 import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 import { Component, Input, NgIterable, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ControlContainer, FormGroup, FormControl, Validators } from '@angular/forms';
+import { keyable } from '../../interface/keyable-interface';
 
 @Component({
   selector: 'app-input',
@@ -22,6 +23,8 @@ export class InputComponent implements OnInit {
   @Input() validator : string = ""
   @Input() error : boolean = false;
   @Input() errorTitle : string = ""
+  @Input() radioValue : keyable[] = [];
+
   inputGroup : FormGroup;
 
   constructor() {

@@ -1,23 +1,14 @@
 <div class="top-menu-bar shadow-sm">
     <button (click)="toggle()" mat-icon-button class="shadow-border" >
         <mat-icon>menu</mat-icon>
-    </button>
-    <div class="user-profile">
-        <div >
-            <i class="id badge outline icon"></i>
-            <div>
-                <b> Young Hyun </b><br />
-                <span>You have 3 new task </span>
-            </div>
-        </div>
-    </div>
+    </button>    
 </div>
 <div class="top-navigation-bar shadow-sm">
     <i class="flag icon"></i>
     <div *ngFor="let path of paths">
         <i class="chevron right icon"></i>
         <span>
-            {{path}}
+            {{ path.length > 10 ? path.slice(0, 13) + "..." : path }}
         </span>
     </div>
 </div>

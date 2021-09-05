@@ -34,6 +34,8 @@ export class AddComponent implements OnInit, AfterViewInit {
 
   createAgain() {
     this.projectForm.reset();
+    this.errorList = {};
+    this.errorText = {}
     this.success = false;
   }
 
@@ -72,7 +74,6 @@ export class AddComponent implements OnInit, AfterViewInit {
           this.errorText[control] = `${control} is required`
         } else {
           this.errorList[control] = false;
-          
         }
       }
     }

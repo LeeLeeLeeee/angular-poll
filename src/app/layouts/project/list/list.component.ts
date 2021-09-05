@@ -15,6 +15,7 @@ import { keyable } from 'src/app/shared/interface/keyable-interface';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
+import { projectForm } from '../project.component';
 
 @Component({
   selector: 'app-list',
@@ -29,19 +30,18 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
   lastPage: number = 0;
   totalCount: number = 0;
   contextMenu: boolean = false;
-  selectedId: string = '';
   filter: keyable = {
     projectTitle: '',
     status: '',
   };
   @ViewChild('contextMenuElement') ctxElement: ElementRef;
-  @ViewChild('deleteModal') deleteModal : ElementRef;
+  @ViewChild('deleteModal') deleteModal: ElementRef;
   constructor(
     private renderer: Renderer2,
     private layoutService: LayoutService,
     private router: Router,
     private projectService: ProjectService,
-    private modalService : ModalService
+    private modalService: ModalService
   ) {}
 
   closeContextMenu(e): any {
@@ -49,7 +49,6 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
     const isMenuBtn = target.classList.contains('menu-btn');
     if (this.contextMenu && !isMenuBtn) {
       this.contextMenu = !this.contextMenu;
-      this.selectedId = '';
     }
     return true;
   }
@@ -59,17 +58,15 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.closeContextMenu = this.closeContextMenu.bind(this);
     document.body.addEventListener('click', this.closeContextMenu);
     this.getProjectLists(1);
-    this.modalService.create('delete', ['shadow-border', 'lg']);
-    
+  }
+
+  ngAfterViewInit(): void {
+    this.modalService.create('delete', ['shadow-border'], 'large');
+    this.modalService.append('delete', this.deleteModal.nativeElement);
   }
 
   ngOnDestroy(): void {
     document.body.removeEventListener('click', this.closeContextMenu);
-  }
-
-  ngAfterViewInit() : void {
-    this.modalService.append('delete', this.deleteModal.nativeElement)
-    this.modalService.show('delete')
   }
 
   changeToggleStatus() {
@@ -87,8 +84,11 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.filter.status !== '') params.status = this.filter.status;
 
     this.projectService
-      .select(params)
+      .select<projectForm>(params)
       .then((data) => {
+        if (this.page !== 1 && data.projectList.length === 0) {
+          this.getProjectLists(1);
+        }
         this.projectLists = data.projectList;
         this.totalCount = data.totalCount;
         this.lastPage = Math.ceil(this.totalCount / this.pageSize);
@@ -112,7 +112,7 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openMenu(e: MouseEvent, id: string) {
     const ctxElement = this.ctxElement.nativeElement;
-    this.selectedId = id;
+    this.projectService.id = id;
     const target = this.layoutService.convertEventToElement(e);
     if (!(target instanceof HTMLDivElement)) {
       const { top, right } = target.getClientRects()[0];
@@ -144,11 +144,29 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openModal() {
-    this.modalService.append('delete', this.deleteModal.nativeElement)
-    this.modalService.show('delete')
+    this.modalService.show('delete');
   }
 
-  deleteProject(e : MouseEvent) {
-    
+  deleteProject(e: MouseEvent) {
+    this.projectService
+      .delete()
+      .then(() => {
+        this.getProjectLists(this.page);
+        this.cancelDelete();
+      })
+      .catch((reason) => {});
+  }
+
+  cancelDelete() {
+    this.projectService.id = '';
+    this.modalService.hide('delete');
+  }
+
+  goToDetail(id: string) {
+    this.router.navigate(['project', id]);
+  }
+
+  getProgress(total: number, end: number) : string {
+    return String(Math.round(end / total * 100)) + "%"
   }
 }

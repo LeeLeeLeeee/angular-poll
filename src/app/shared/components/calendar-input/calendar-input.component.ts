@@ -31,10 +31,13 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
         }
       }
     })
+   
   }
 
   ngAfterContentInit() : void {
-
+    this.parenrForm.get(this.inputEle.nativeElement.name).valueChanges.subscribe(date => {
+      this.selectedDate = date
+    })
   }
 
   ngOnDestroy() : void {
@@ -100,8 +103,8 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
   }
   
   choiceDate(date) {
-    this.selectedDate = `${this.calendarInfo.year}/${this.calendarInfo.month}/${("0"+date).slice(1)}`
-    this.parenrForm.get(this.inputEle.nativeElement.name).setValue(this.selectedDate);
+    const selectedDate = `${this.calendarInfo.year}/${this.calendarInfo.month}/${("0"+date).slice(1)}`
+    this.parenrForm.get(this.inputEle.nativeElement.name).setValue(selectedDate);
     this.toggleCalendar();
   }
 

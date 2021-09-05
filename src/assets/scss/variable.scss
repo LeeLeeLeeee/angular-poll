@@ -1,9 +1,16 @@
-$text-secondary: rgb(100,116,139);
+
 $vertical-width: 100px;
 $vertical-height: 160px;
 $horizon-width: 160px;
 $horizon-height: 100px;
-
+$text-primary: #2284f0;
+$text-danger: #ff8080;
+$text-success: #22c55e;
+$text-light: #eeeeee;
+$text-secondary: #bfbfbf;
+$text-gray: #828282;
+$text-dark: #474747;
+$bg-color: white;
 
 @mixin absolute-center {
     position: absolute;
@@ -12,8 +19,10 @@ $horizon-height: 100px;
     transform: translate(-50%, -50%);
 }
 
+
+
 @mixin korean-font {
-    font-family: "Hahmlet", Arial, Helvetica, sans-serif;
+    font-family: "Kr-Noto", Arial, Helvetica, sans-serif;
 }
 
 @mixin english-font {

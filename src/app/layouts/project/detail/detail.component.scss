@@ -1,0 +1,395 @@
+@import '/src/assets/scss/variable.scss';
+
+.detail-wrapper {
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: minmax(100px, auto) repeat(3, minmax(250px, auto)) minmax(100px, auto);
+    -ms-grid-column: minmax(100px, auto) repeat(3, minmax(250px, auto)) minmax(100px, auto);
+    grid-template-rows: repeat(2, 1fr) 50px repeat(6, 1fr);
+    -ms-grid-row: repeat(2, 1fr) 50px repeat(6, 1fr);
+    height: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: .125em;
+    @include korean-font();
+
+
+    & > .project-info {
+        grid-column: 2 / 5;
+        grid-row: 1 / 3;
+        padding: .25em;
+        display: flex;
+        flex-direction: column;
+        width:70%;
+        min-width: 740px;
+        justify-self: center;
+
+        & > div:nth-child(1) {
+            display: inline-flex;
+            flex-direction: row;
+            padding:.25em;
+            justify-content: space-between;
+            align-items: center;
+            & > p { font-weight:  600; font-size: 1.2em; margin: 0px; }
+            & > span { 
+                font-weight:  600; 
+                font-size: 1.5em; 
+                margin: 0px;
+                cursor: pointer;
+                & > i {
+                    position: relative;
+                    &::before {
+                        @include absolute-center()
+                    }
+                }
+            }
+            
+        }
+
+        & > div:nth-child(2) {
+            flex:1;
+            display: flex;
+            flex-direction: row;
+            padding:.25em;
+            justify-content: space-between;
+            & > div {
+                flex:1;
+                margin:.25em;
+                border-radius: 1em;
+                padding: .25em;
+                position: relative;
+
+                &  > .title {
+                    position: absolute;
+                    font-weight: 600;
+                    right:10%;
+                    top:10%;
+                }
+
+                &  > .content {
+                    position: absolute;
+                    font-weight: 600;
+                    font-size: 1.5em;
+                    
+                    @include absolute-center();
+                }
+                
+            }
+
+            & > div:nth-child(2) > .content {
+                color:$text-success;
+            }
+
+            & > div:last-child > .content {
+                color:$text-primary;
+            }
+        }
+    }
+
+    & > div.task-list-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        grid-column: 2 / 5;
+        grid-row: 3 / 4;
+        width:70%;
+        min-width: 740px;
+        justify-self: center;
+        height: 2em;
+        & > p:first-child {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 0px 10px 0px 0px;
+            z-index:1
+        }
+
+        & > span {
+            border-radius: 9999px;
+            padding: .25em 1.2em .25em 1.2em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: background-color .2s ease-in-out;
+            cursor: pointer;
+            background-color: white;
+            
+            &:hover {
+                background-color: #eeeeee;
+                
+            }
+        }
+    }
+
+    & > .task-list {
+        grid-column: 2 / 5;
+        grid-row: 4 / 9;
+        width:70%;
+        min-width: 740px;
+        justify-self: center;
+        padding:.1em;
+        display:grid;
+        display: -ms-grid;
+        grid-template-columns: 1fr;
+        -ms-grid-column: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        -ms-grid-row: repeat(3, 1fr);
+        gap:1em;
+        overflow-y: auto;
+        padding-right: 6px;
+        & > .list-wrapper:last-child::after {
+            content: '';
+            display: block;
+            height:1em;
+        }
+        & > .list-wrapper {
+            & > .task-box {
+                height: 140px;
+                display: flex;
+                flex-direction: row;
+                & > div:nth-child(1) { /* 작업 박스 좌측 */
+                    width: 360px;
+                    border-right: 1.5px solid #eeeeee;
+                    padding:.52em;
+                    display: flex;
+                    flex-direction: row;
+                    position: relative;
+
+                    & > div:nth-child(1) {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        margin-right: .52em;
+                        flex: 3;
+
+                        & > p { margin: 0px 0px .3em 0px; color:$text-dark }
+                        
+                        & > p:nth-child(2) {
+                            font-size: .8em;                 
+                            &.end { color:$text-danger }
+                            &.start { color:$text-primary }
+                            &.work { color:$text-success }
+                        }
+
+                        & > p:nth-child(3) { 
+                            font-size: .8em; 
+                            color:#bfbfbf;
+                         }
+                    }
+
+                    & > div:nth-child(2) {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        flex: 1;
+                        & > p { 
+                            margin-bottom: .25em;
+                            font-size: .9em;
+                            text-align: center;
+                            padding: .1em .25em .1em .25em;
+                            border-radius: 9999px;
+                            cursor: pointer;
+                            transition: background-color .2s ease-in-out, color .2s ease-in-out;
+                        }
+
+                        & > p:nth-child(1):hover {
+                            background-color: #eeeeee;
+                        }
+                        & > p:nth-child(2):hover {
+                            background-color: #eeeeee;
+                        }
+                        & > p:nth-child(3):hover {
+                            background-color: #ffecef;
+                            color:#fd4a65;
+                        }
+                        
+                    }
+
+                    
+                }
+
+                & div:nth-child(2) { /* 작업 박스 우측 */
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    color:$text-dark;
+                    & > div {
+                        flex: 1;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        
+                        & > div {
+                            flex: 1;
+                            font-size: .9em;
+                            padding: .52em;
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+
+                    & > div:nth-child(1) {
+                        border-bottom: 1.5px solid #eeeeee;
+                        & > div {
+                            
+                            & > p {
+                                margin: 0px;
+                                padding-left:.5em;
+                            }
+
+                            & > span {
+                                position: absolute;
+                                top:60%;
+                                left:50%;
+                                transform: translate(-50%, -50%);
+                                font-size: .9em;
+                                font-weight: 600;
+                            }
+                        }
+                        
+                        & > div:first-child > span { color: $text-primary;  }
+                        & > div:nth-child(2) > span { color: $text-success;  }
+                        & > div:nth-child(3) > span { color: black;  }
+                        & > div:last-child > span { color: $text-danger;  }
+                    }
+                    
+                    & > div:nth-child(2) { /* 하단 버튼 목록 */
+                        flex: 1;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        & > div {
+                            flex: 1;
+                            font-size: .9em;
+                            padding: .52em;
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                            cursor: pointer;
+                            transition: box-shadow .1s ease-out;
+
+                            &:hover {
+                                & > span {
+                                    color: $text-primary;
+                                }
+                            }
+
+                            
+
+                            & > p {
+                                margin: 0px;
+                                padding-left:.5em;
+                            }
+
+                            & > span {
+                                position: absolute;
+                                top:60%;
+                                left:50%;
+                                transform: translate(-50%, -50%);
+                                font-size: 1.2em;
+                                transition: color .1s ease-out;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            & > .task-box:nth-child(n+2) {
+                margin-top:.8em
+            }
+        }
+        
+    }
+ }
+
+ .create-modal {
+     width: 50%;
+     justify-self: stretch;
+     align-self: center;
+     flex: 1 1 0px;
+     display: flex;
+     flex-direction: column;
+     & > h3 {
+        @include korean-font();
+         margin-bottom: .2em;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: space-between;
+
+         & > span { font-weight: 600;}
+     }
+
+     & > .success-page {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         flex: 1 1 0px;
+         @include korean-font();
+         @include animation('fadeIn .5s ease');
+
+         & div {
+            margin-bottom: 1em;
+        }
+
+    
+
+        & > i {
+            width:50px;
+            height: 50px;
+            border-radius: 50px;
+            margin:20px;
+            position: relative;
+            font-size: 1.3em;
+            box-shadow: rgba(50, 219, 41, 0.501) 0px 0px 1px 2px ;
+            background-color: rgba(50, 219, 41, 0.501);
+            color:#00671b ;
+            &::before{
+                @include absolute-center();
+            }
+        }
+     }
+ }
+
+ .delete-modal {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex:1;
+    & > div:nth-child(1) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        padding:1em;
+        color:#fd4a65
+    }
+
+    & > div:nth-child(2) {
+        @include korean-font();
+        font-size: 1.5em;
+        text-align: center;
+        line-height: 1.2;
+        padding:1em;
+        font-weight: 500;
+    }
+
+    & > div:nth-child(3) {
+        @include korean-font();
+        position: absolute;
+        bottom:0%;
+        margin-bottom: 2.25em;
+        display: flex;
+        justify-content: space-between;
+        left:50%;
+        transform: translate(-50%, 0%);
+        
+        & > app-button:nth-child(1) {
+            margin-right:20px
+        }
+    }
+    
+}

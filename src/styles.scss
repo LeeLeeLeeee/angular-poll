@@ -55,6 +55,16 @@ $shadow: 0 1px 3px 0 #0000001a,0 1px 2px 0 #0000000f;
 }
 
 @font-face {
+    font-family: 'Kr-Noto';
+    src: url('./assets/font/Noto_Sans_KR/NotoSansKR-Medium.otf')
+}
+
+@font-face {
+    font-family: 'Kr-Noto-Bold';
+    src: url('./assets/font/Noto_Sans_KR/NotoSansKR-Bold.otf')
+}
+
+@font-face {
     font-family: "En-Noto";
     src: url("./assets/font/Noto_Serif/NotoSerif-Regular.ttf");
 }
@@ -128,6 +138,11 @@ body > .modal {
     &.lg {
         width: $horizon-width * 3;
         height: $horizon-height * 3; 
+    }
+
+    &.xl {
+        width: $horizon-width * 5;
+        height: $horizon-height * 5
     }
 
     & > div:nth-child(1) {

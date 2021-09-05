@@ -1,0 +1,148 @@
+<div class="detail-wrapper">
+    <section class="project-info">
+        <div>
+            <p>
+                2021년 파라다이스 호텔 만족도 조사
+            </p>
+            <span (click)="backToProject()">
+                <i class="icon long arrow alternate left"></i>
+            </span>
+        </div>
+        <div>
+            <div class="shadow-border">
+                <span class="title">전체 설문</span>
+                <span class="content">{{status.total || 0}}</span>
+            </div>
+            <div class="shadow-border">
+                <span class="title">진행중인 설문</span>
+                <span class="content">{{status.start || 0}}</span>
+            </div>
+            <div class="shadow-border">
+                <span class="title">종료된 설문</span>
+                <span class="content">{{status.end || 0}}</span>
+            </div>
+        </div>
+    </section>
+    <div class="task-list-header">
+        <p> 작업 목록 </p>
+        <span class="shadow-border" (click)="openModal()">
+            <span>
+                생성
+            </span>
+        </span>
+    </div>
+    <section class="task-list">
+        <div class="list-wrapper" *ngFor="let task of tasks; trackBy: tbyi">
+            <div class="task-box shadow-border">
+                <div>
+                    <div>
+                        <p>{{task.taskTitle}}</p>
+                        <p [ngClass]="task.taskStatus === '1' ? 'work' : task.taskStatus === '2' ? 'start' : 'end' ">
+                            {{statusToText(task.taskStatus)}}</p>
+                        <p>{{task.startDate | date:'YYYY.MM.dd'}} ~ {{task.endDate | date:'YYYY.MM.dd'}} </p>
+                    </div>
+                    <div>
+                        <p class="shadow-border"><i class="cog icon"></i>설문</p>
+                        <p class="shadow-border"><i class="icon edit"></i>수정</p>
+                        <p class="shadow-border" (click)="openDeleteModal(task.id)"><i class="icon trash alternate outline"></i>삭제</p>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <p>완료</p>
+                            <span>1,000</span>
+                        </div>
+                        <div>
+                            <p>진행</p>
+                            <span>235</span>
+                        </div>
+                        <div>
+                            <p>중단</p>
+                            <span>120</span>
+                        </div>
+                        <div>
+                            <p>에러</p>
+                            <span>5</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <p>다운로드</p>
+                            <span>
+                                <i class="icon download"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <p>분석</p>
+                            <span>
+                                <i class="icon chart pie"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <p>현황 테이블</p>
+                            <span>
+                                <i class="icon table"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section style="display: none;">
+        <div class="create-modal" #createModal>
+            <ng-container *ngIf="!success">
+                <h3><span>설문 생성</span>
+                    <app-button class="primary" (click)="createTask($event)">생성</app-button>
+                </h3>
+                <form [formGroup]="taskForm">
+                    <app-input [error]="!!errorList.title" [errorTitle]="errorText?.title || ''"
+                        [parentGroup]="taskForm" [controlerName]="'title'" [titleText]="'Title'" [required]="true">
+                    </app-input>
+                    <app-input [error]="!!errorList.from" [errorTitle]="errorText?.from || ''" [parentGroup]="taskForm"
+                        [controlerName]="'from'" [inputType]="'date'" [titleText]="'From'" [required]="true">
+                    </app-input>
+                    <app-input [error]="!!errorList.to" [errorTitle]="errorText?.to || ''" [parentGroup]="taskForm"
+                        [controlerName]="'to'" [inputType]="'date'" [titleText]="'To'" [required]="true"></app-input>
+                    <app-input [parentGroup]="taskForm" [controlerName]="'description'" [titleText]="'Description'">
+                    </app-input>
+                    <app-input [error]="!!errorList.taskType" [errorTitle]="errorText?.taskType || ''"
+                        [parentGroup]="taskForm" [radioValue]="taskType" [inputType]="'radio'"
+                        [controlerName]="'taskType'" [titleText]="'Survey type'" [required]="true">
+                    </app-input>
+                </form>
+            </ng-container>
+            <ng-container *ngIf="success">
+                <section class="success-page">
+                    <i class="thumbs up outline icon"></i>
+                    <div>
+                        작업 생성에 성공하였습니다.
+                    </div>
+                    <div>
+                        <app-button class="w100 primary" (click)="createAgain()">
+                            추가 생성
+                        </app-button>
+                    </div>
+                </section>
+            </ng-container>
+        </div>
+        <div class="delete-modal" #deleteModal>
+            <div>
+                <i class="trash alternate outline icon"></i>
+            </div>
+            <div>
+                작업을 삭제하시면 복구할 수 없습니다.<br />
+                그래도 삭제하시겠습니까?
+            </div>
+            <div>
+                <app-button (click)="closeModal('delete')">취소</app-button>
+                <app-button (click)="deleteTask($event)" class="danger">삭제</app-button>
+            </div>
+        </div>
+    </section>
+</div>

@@ -2,25 +2,34 @@
     <span *ngIf="titleText !== ''">
         <i *ngIf="titleIcon.length > 0" [ngClass]="titleIcon" class="icon"></i>
         <span *ngIf="required" class="required-sign"></span>
-        {{titleText}} 
+        {{titleText}}
         <span class="popup" [attr.data-tooltip]="errorTitle" data-position="top left">
-            <i class="exclamation triangle icon error-icon"  *ngIf="error"></i>
+            <i class="exclamation triangle icon error-icon" *ngIf="error"></i>
         </span>
-        
+
     </span>
-    <div class="shadow-border" [ngClass]="{'error' : error}">
+    <div class="shadow-border"
+        [ngClass]="{'error' : error, 'fix-height' : inputType !== 'radio' && inputType !== 'checkbox' && inputType !== 'textarea'}">
         <span *ngIf="leftText != ''">
             <i *ngIf="leftIcon.length > 0" [ngClass]="leftIcon" class="icon"></i>
             {{leftText}}
         </span>
         <section [formGroup]="inputGroup" [ngSwitch]="inputType">
             <input [formControlName]="controlerName" [placeholder]="titleText" *ngSwitchCase="'text'" type="text" />
-            <input [formControlName]="controlerName" [placeholder]="titleText"  *ngSwitchCase="'number'" type="text" />
+            <input [formControlName]="controlerName" [placeholder]="titleText" *ngSwitchCase="'number'" type="text" />
             <textarea [formControlName]="controlerName" *ngSwitchCase="'textarea'" type="text"></textarea>
-            <app-calendar-input *ngSwitchCase="'date'" [parentForm]="inputGroup" >
-                <input type="hidden" #hiddenInput [name]="controlerName" [formControlName]="controlerName"/>
+            <app-calendar-input *ngSwitchCase="'date'" [parentForm]="inputGroup">
+                <input type="hidden" #hiddenInput [name]="controlerName" [formControlName]="controlerName" />
             </app-calendar-input>
-            <input [formControlName]="controlerName" [placeholder]="titleText"  *ngSwitchDefault type="text" />
+            <div *ngSwitchCase="'radio'" class="radio-list">
+                <ul>
+                    <li *ngFor="let item of radioValue; let i = index">
+                        <label><input type="radio" [formControlName]="controlerName"
+                                [value]="item.value"><span>{{item.label}}</span></label>
+                    </li>
+                </ul>
+            </div>
+            <input [formControlName]="controlerName" [placeholder]="titleText" *ngSwitchDefault type="text" />
 
         </section>
         <span *ngIf="leftText != ''">

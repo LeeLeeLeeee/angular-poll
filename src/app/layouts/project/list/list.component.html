@@ -46,22 +46,21 @@
                 <div class="content">
                     <p>
                         <i class="clock outline icon"></i>
-                        {{project.startDate | date:'YYYY/MM/dd'}} ~ {{project.endDate | date:'YYYY/MM/dd' }}
+                        {{project.startDate | date:'YYYY.MM.dd'}} ~ {{project.endDate | date:'YYYY.MM.dd' }}
                     </p>
                     <p>
                         <i class="clipboard icon"></i>
-                        Survey Status
+                        Survey Status ( Total : {{project.totalTask || 0}} , End : {{project.endTask || 0 }} )
                     </p>
                 </div>
                 <div class="footer">
                     <div class="progress">
-                        <span style="width:50%">
+                        <span [ngStyle]="{'width': project.totalTask ? getProgress(project.totalTask, project.endTask || 0) : '0%'}">
                         </span>
                     </div>
-                    <div class="shadow-border task-btn">
-
+                    <app-button class="task-btn" (click)="goToDetail(project.id)">
                         <i class="arrow right icon"></i>
-                    </div>
+                    </app-button>
                 </div>
             </div>
             <div class="bottom-paging">
@@ -86,7 +85,7 @@
                 그래도 삭제하시겠습니까?
             </div>
             <div>
-                <app-button (click)="deleteProject($event)">취소</app-button>
+                <app-button (click)="cancelDelete()">취소</app-button>
                 <app-button (click)="deleteProject($event)" class="danger">삭제</app-button>
             </div>
         </div>

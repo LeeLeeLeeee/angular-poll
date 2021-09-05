@@ -10,6 +10,9 @@ import { InputDirective } from './directive/input.directive';
 import { MonthPipe } from './pipes/month.pipe';
 import { CalendarInputComponent } from './components/calendar-input/calendar-input.component';
 import { ButtonComponent } from './components/button/button.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenService } from './services/token.validation.service';
+import { LoggingService } from './services/logging.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,6 @@ import { ButtonComponent } from './components/button/button.component';
   ],
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
   ],
@@ -36,6 +38,10 @@ import { ButtonComponent } from './components/button/button.component';
     MonthPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers:[CookieService]
+  providers:[
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenService, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingService, multi: true},
+  ]
 })
 export class SharedModule { }
