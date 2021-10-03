@@ -13,6 +13,10 @@ import { ButtonComponent } from './components/button/button.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenService } from './services/token.validation.service';
 import { LoggingService } from './services/logging.service';
+import { ImgButtonComponent } from './components/img-button/img-button.component';
+import { ImgButtonListComponent } from './components/img-button-list/img-button-list.component';
+import { SelectComponent } from './components/select/select.component';
+import { IconDirective } from './directive/icon.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { LoggingService } from './services/logging.service';
     MonthPipe,
     CalendarInputComponent,
     ButtonComponent,
+    ImgButtonComponent,
+    ImgButtonListComponent,
+    SelectComponent,
+    IconDirective,
   ],
   imports: [
     CommonModule,
@@ -35,7 +43,11 @@ import { LoggingService } from './services/logging.service';
     InputComponent,
     CalendarInputComponent,
     ButtonComponent,
-    MonthPipe
+    ImgButtonComponent,
+    ImgButtonListComponent,
+    SelectComponent,
+    MonthPipe,
+    IconDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[

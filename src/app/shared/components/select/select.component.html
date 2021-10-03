@@ -1,0 +1,24 @@
+<div>
+    <label>{{selectTitle}}</label>
+    <select #selectElement [value]="getSelectValue()">
+        <option *ngFor="let item of options;let i = index; " [ngValue]="item">
+            {{item.label}}
+        </option>
+    </select>
+    <div class="option-list shadow-sm" [ngClass]="{'on': isOptionOpen}">
+        <div class="choice-label" (click)="toggleOption()" [ngClass]="{'hasValue' : !!getSelectValue()}">
+            <ng-container *ngIf="!getSelectValue(); else content" >
+                {{placeHolder}}
+            </ng-container>
+            <ng-template #content>
+                {{getSelectLabel()}}
+            </ng-template>
+        </div>
+        <i class="chevron down icon"></i>
+        <div class="options shadow-border" [ngClass]="{'hide': !isOptionOpen}">
+            <ng-container *ngFor="let item of options;let i = index; ">
+                <div [ngClass]="isSelected(item)" (click)="selectValue(item)" [attr.data-value]="item.value">{{item.label}}</div>
+            </ng-container>
+        </div>
+    </div>
+</div>

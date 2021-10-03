@@ -1,0 +1,91 @@
+<section class="survey-wrapper">
+    <div class="survey-header">
+        <div class="tool-type">
+            <a class="shadow-border active" href="#">문항</a>
+            <a class="shadow-border" href="#">로직</a>
+            <a class="shadow-border" href="#">테스트</a>
+        </div>
+        <div class="tool-header">
+            <div>
+
+                <app-img-button [toolTip]="'미리보기'" [iconName]="'eye slash'"></app-img-button>
+                <app-img-button-list>
+                    <app-img-button [toolTip]="'되돌리기'" [iconName]="'undo'"></app-img-button>
+                    <app-img-button [toolTip]="'다시하기'" [iconName]="'redo'"></app-img-button>
+                </app-img-button-list>
+                
+            </div>
+        </div>   
+    </div>
+    <div class="survey-body">
+        <div class="question-list">
+            <div class="question-top">
+                <app-select [placeHolder]="'문항 타입을 선택해주세요'" [options]="questionFilter"></app-select>
+            </div>
+            <div class="question-header">
+                <div>
+                    <input type="checkbox">
+                </div>
+                <div>
+                    ID
+                </div>
+                <div>
+                    Name
+                </div>
+                <div>
+                    <i class="search icon"></i>
+                </div>
+                <div>
+                    <i class="sort icon"></i>
+                </div>
+            </div>
+            <div class="question-body">
+                <ng-container *ngFor="let item of questionList; let i = index">
+                    <div [ngClass]="i === 0 && 'active'">
+                        <div>
+                            <input type="checkbox">
+                        </div>
+                        <ng-container [ngSwitch]="i">
+                            <div class="type-attr" *ngSwitchCase="0">
+                                <span>0000</span>
+                            </div>
+                            <div class="type-single" *ngSwitchCase="1">
+                                <span>0001</span>
+                            </div>
+                            <div class="type-multi" *ngSwitchCase="2">
+                                <span>0002</span>
+                            </div>
+                            <div class="type-rank" *ngSwitchCase="3">
+                                <span>0003</span>
+                            </div>
+                            <div class="type-text" *ngSwitchCase="4">
+                                <span>0004</span>
+                            </div>
+                            <div class="type-attr" *ngSwitchCase="5">
+                                <span>0005</span>
+                            </div>
+                        </ng-container>
+                        <div>
+                            Somthing Titlexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        </div>
+                        <i class="hand paper outline icon"></i>
+                        <i class="trash alternate outline icon"></i>
+                        <!-- <i class="star outline icon target-icon"></i> -->
+                    </div>
+                </ng-container>
+                
+            </div>
+        </div>
+        <div class="survey-content" [ngSwitch]="innreMenu">
+            <ng-container *ngSwitchCase="'logic'">
+                <app-logic></app-logic>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tool'">
+                <app-tool></app-tool>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                <app-tool></app-tool>
+            </ng-container>
+        </div>
+    </div>
+</section>

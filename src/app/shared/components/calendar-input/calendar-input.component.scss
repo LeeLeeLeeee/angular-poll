@@ -169,9 +169,9 @@
             flex-direction: row;
             justify-content: space-between;
             padding:.25em;
-            border-bottom:1px solid $text-secondary;
+            border-bottom:1px solid $color-secondary;
             & > span {
-                color: $text-secondary;
+                color: $color-secondary;
                 font-size: .85em;
                 flex:1;
             }

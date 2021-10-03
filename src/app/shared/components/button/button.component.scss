@@ -1,6 +1,6 @@
 :host > button {
-    font-family: "Kr-Noto", "En-Noto", Arial, Helvetica, sans-serif;
-    padding:.525em 1.25em .525em 1.25em;
+    font-family: "AppleSDGothicNeo", Arial, Helvetica, sans-serif;
+    padding: 0px 1.25em;
     cursor: pointer;
     border:0px;
     border-radius: .25em;
@@ -8,12 +8,8 @@
     transition: box-shadow .2s ease, transform .2s ease, --webkit-transform .2s ease, font-size .1s ease;
     flex:1;
     position: relative;
-
-    
-
-    &.en {
-        font-family: "En-Noto", Arial, Helvetica, sans-serif ;
-    }
+    line-height: 40px;
+    height: 40px;
 
     &:hover {
         box-shadow: rgb(132 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 3px;

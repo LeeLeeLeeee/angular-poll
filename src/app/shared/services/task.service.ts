@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { keyable } from '../interface/keyable-interface';
 import restApi from '../interface/restApi-interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService implements restApi{
+export class TaskService implements restApi {
   private _taskId : string = '';
   
   constructor(private httpClient: HttpClient) { }
@@ -21,9 +22,15 @@ export class TaskService implements restApi{
     this._taskId = id;
   }
 
-  select(projectId : any) : Promise<any> {
-    const params = new HttpParams({fromString: `projectId=${projectId}&page_size=100`});
-    
+  getOne(taskId : string) : Promise<any> {
+    return this.httpClient.get<any>(`${environment.apiAddres}/v1/task/${taskId}`, {
+      withCredentials:true
+    }).toPromise()
+  }
+
+  select(projectId: any, filter: keyable = {}) : Promise<any> {
+    const params = new HttpParams({fromString: `projectId=${projectId}&page_size=100&taskTitle=${filter?.taskTitle || ''}`});
+    console.log(params)
     return this.httpClient.get<any>(`${environment.apiAddres}/v1/task`, {
       withCredentials: true,
       params
@@ -40,9 +47,9 @@ export class TaskService implements restApi{
     )
   }
 
-  delete() : Promise<any> {
-    if(this._taskId !== '') {
-      return this.httpClient.delete(`${environment.apiAddres}/v1/task/${this._taskId}`, {
+  delete(id : string) : Promise<any> {
+    if(id !== '') {
+      return this.httpClient.delete(`${environment.apiAddres}/v1/task/${id}`, {
         withCredentials: true,
       })
       .pipe(

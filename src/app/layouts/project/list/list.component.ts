@@ -34,8 +34,10 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
     projectTitle: '',
     status: '',
   };
+  selectedProjectId : string = '';
   @ViewChild('contextMenuElement') ctxElement: ElementRef;
   @ViewChild('deleteModal') deleteModal: ElementRef;
+  
   constructor(
     private renderer: Renderer2,
     private layoutService: LayoutService,
@@ -112,7 +114,7 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openMenu(e: MouseEvent, id: string) {
     const ctxElement = this.ctxElement.nativeElement;
-    this.projectService.id = id;
+    this.selectedProjectId = id;
     const target = this.layoutService.convertEventToElement(e);
     if (!(target instanceof HTMLDivElement)) {
       const { top, right } = target.getClientRects()[0];
@@ -126,7 +128,7 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  projectSelect(e: KeyboardEvent) {
+  searchProject(e: KeyboardEvent) {
     if (e.key === 'Enter') {
       const target = this.layoutService.convertEventToElement(e as Event);
       this.filter.projectTitle = (target as HTMLInputElement).value;
@@ -149,7 +151,7 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   deleteProject(e: MouseEvent) {
     this.projectService
-      .delete()
+      .delete(this.selectedProjectId)
       .then(() => {
         this.getProjectLists(this.page);
         this.cancelDelete();
@@ -158,7 +160,7 @@ export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   cancelDelete() {
-    this.projectService.id = '';
+    this.selectedProjectId = '';
     this.modalService.hide('delete');
   }
 

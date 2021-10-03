@@ -3,14 +3,16 @@ $vertical-width: 100px;
 $vertical-height: 160px;
 $horizon-width: 160px;
 $horizon-height: 100px;
-$text-primary: #2284f0;
-$text-danger: #ff8080;
-$text-success: #22c55e;
-$text-light: #eeeeee;
-$text-secondary: #bfbfbf;
-$text-gray: #828282;
-$text-dark: #474747;
-$bg-color: white;
+$color-white: white;
+$color-primary: #2284f0;
+$color-danger: #ff8080;
+$color-success: #22c55e;
+$color-light: #eeeeee;
+$color-secondary: #bfbfbf;
+$color-gray: #828282;
+$color-dark: #474747;
+$bg-color: #f1f3f4;
+
 
 @mixin absolute-center {
     position: absolute;
@@ -22,11 +24,11 @@ $bg-color: white;
 
 
 @mixin korean-font {
-    font-family: "Kr-Noto", Arial, Helvetica, sans-serif;
+    font-family: "AppleSDGothicNeo", Arial, Helvetica, sans-serif;
 }
 
 @mixin english-font {
-    font-family: "En-Noto", Arial, Helvetica, sans-serif;
+    font-family: "AppleSDGothicNeo", Arial, Helvetica, sans-serif;
 }
 
 @mixin animation($animate...) {

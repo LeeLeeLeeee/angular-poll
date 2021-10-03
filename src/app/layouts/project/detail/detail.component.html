@@ -1,99 +1,143 @@
 <div class="detail-wrapper">
-    <section class="project-info">
-        <div>
-            <p>
-                2021년 파라다이스 호텔 만족도 조사
-            </p>
-            <span (click)="backToProject()">
-                <i class="icon long arrow alternate left"></i>
-            </span>
-        </div>
-        <div>
-            <div class="shadow-border">
-                <span class="title">전체 설문</span>
-                <span class="content">{{status.total || 0}}</span>
-            </div>
-            <div class="shadow-border">
-                <span class="title">진행중인 설문</span>
-                <span class="content">{{status.start || 0}}</span>
-            </div>
-            <div class="shadow-border">
-                <span class="title">종료된 설문</span>
-                <span class="content">{{status.end || 0}}</span>
-            </div>
-        </div>
-    </section>
-    <div class="task-list-header">
-        <p> 작업 목록 </p>
-        <span class="shadow-border" (click)="openModal()">
-            <span>
-                생성
-            </span>
-        </span>
+    <div (click)="backToProject()">
+        <i [bgIcon]="'leftArrow'" [size]="24" [color]="'dark'"></i><span>Back to Project</span>
     </div>
-    <section class="task-list">
-        <div class="list-wrapper" *ngFor="let task of tasks; trackBy: tbyi">
-            <div class="task-box shadow-border">
-                <div>
-                    <div>
-                        <p>{{task.taskTitle}}</p>
-                        <p [ngClass]="task.taskStatus === '1' ? 'work' : task.taskStatus === '2' ? 'start' : 'end' ">
-                            {{statusToText(task.taskStatus)}}</p>
-                        <p>{{task.startDate | date:'YYYY.MM.dd'}} ~ {{task.endDate | date:'YYYY.MM.dd'}} </p>
-                    </div>
-                    <div>
-                        <p class="shadow-border"><i class="cog icon"></i>설문</p>
-                        <p class="shadow-border"><i class="icon edit"></i>수정</p>
-                        <p class="shadow-border" (click)="openDeleteModal(task.id)"><i class="icon trash alternate outline"></i>삭제</p>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <div>
-                            <p>완료</p>
-                            <span>1,000</span>
-                        </div>
-                        <div>
-                            <p>진행</p>
-                            <span>235</span>
-                        </div>
-                        <div>
-                            <p>중단</p>
-                            <span>120</span>
-                        </div>
-                        <div>
-                            <p>에러</p>
-                            <span>5</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>다운로드</p>
-                            <span>
-                                <i class="icon download"></i>
-                            </span>
-                        </div>
-                        <div>
-                            <p>분석</p>
-                            <span>
-                                <i class="icon chart pie"></i>
-                            </span>
-                        </div>
-                        <div>
-                            <p>현황 테이블</p>
-                            <span>
-                                <i class="icon table"></i>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-
+    <div class="detail-content">
+        <section class="project-info shadow-border">
+            <div class="header">
+                <div>{{targetProjectInfo.projectTitle}}</div>
+                <ng-template [ngIf]="targetProjectInfo.projectDescription">
+                    <div>{{targetProjectInfo.projectTitle}}</div>
+                </ng-template>
+                <div>{{targetProjectInfo.startDate | date:'YYYY.MM.dd'}} ~ {{targetProjectInfo.endDate | date:'YYYY.MM.dd'}} </div>
             </div>
+            <div class="content">
+                <span class="shadow-border">
+                    <strong>전체설문</strong>
+                    <span>{{status.total || 0}}</span>
+                </span>
+                <span class="shadow-border">
+                    <strong>진행중인 설문</strong>
+                    <span>{{status.start || 0}}</span>
+                </span>
+                <span class="shadow-border">
+                    <strong>종료된 설문</strong>
+                    <span>{{status.end || 0}}</span>
+                </span>
+                <span class="shadow-border">
+                    <strong>프로젝트 수정</strong>
+                    <i [bgIcon]="'edit'" [size]="30"></i>
+                </span>
+                <span class="shadow-border">
+                    <strong>대시보드 페이지</strong>
+                    <i [bgIcon]="'dashboard'" [size]="30"></i>
+                </span>
+                <span class="shadow-border">
+                    <strong>프로젝트 삭제</strong>
+                    <i [bgIcon]="'delete'" [size]="30" [color]="'danger'"></i>
+                </span>
+            </div>
+            <div class="footer">
+                <div>일별 설문 참여자</div>
+                <div>
+                    <ngx-charts-line-chart
+                        [results]="dailyAccessUser"
+                        [showXAxisLabel]="false"
+                        [showYAxisLabel]="false"
+                        [xAxis]="true"
+                        [yAxis]="true"
+                    >
 
-        </div>
-    </section>
-
+                    </ngx-charts-line-chart>
+                </div>
+            </div>
+        </section>
+        <section class="task-list shadow-border">
+            <div>
+                <h3>작업 목록</h3>
+                <div class="header">
+                    <button (click)="openModal()" class="ui labeled icon button primary h100 shadow-sm" >
+                        <i class="plus icon"></i>
+                        Add Project
+                    </button>
+                    <div class="ui large icon input shadow-sm search-input"
+                        [ngClass]="filter.taskTitle === '' ? 'search' : 'close' ">
+                        <input [value]="filter.taskTitle" type="text" (keyup)="searchTask($event)" placeholder="Search to title" >
+                        <i class="search icon link"></i>
+                        <i (click)="clearTask()" class="close icon link"></i>
+                    </div>
+                </div>
+                <div class="content app-scroll">
+                    <div class="task-box shadow-border" *ngFor="let task of tasks; trackBy: tbyi;">
+                        <div class="left-box">
+                            <div class="top-card">
+                                <div>{{task.taskTitle}}</div>
+                                <div>{{task.startDate | date:'YYYY.MM.dd'}} ~ {{task.endDate | date:'YYYY.MM.dd'}}</div>
+                                <div [ngClass]="task.taskStatus === '1' ? 'work' : task.taskStatus === '2' ? 'start' : 'end'">
+                                    {{statusToText(task.taskStatus)}}
+                                </div>
+                            </div>
+                            <div class="bottom-card">
+                                <span (click)="goToSurvey(task.id)" class="shadow-border">
+                                    <i [bgIcon]="'config'" [size]="20" ></i>
+                                    <strong>설문 작성</strong>
+                                </span>
+                                <span class="shadow-border">
+                                    <i [bgIcon]="'edit'" [size]="20" ></i>
+                                    <strong>작업 수정</strong>
+                                </span>
+                                <span class="shadow-border">
+                                    <i [bgIcon]="'delete'" [size]="20" [color]="'danger'" ></i>
+                                    <strong>작업 삭제</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="right-box">
+                            <div class="top-card">
+                                <span>
+                                    <strong>완료</strong>
+                                    <strong class="primary text">1,000</strong>
+                                </span>
+                                <span>
+                                    <strong>진행</strong>
+                                    <strong class="success text">250</strong>
+                                </span>
+                                <span>
+                                    <strong>중단</strong>
+                                    <strong>15,000</strong>
+                                </span>
+                                <span>
+                                    <strong>에러</strong>
+                                    <strong class="danger text">510</strong>
+                                </span>
+                            </div>
+                            <div class="bottom-card">
+                                <span>
+                                    <strong>다운로드</strong>
+                                    <strong>
+                                        <i [bgIcon]="'download'" [size]="24"></i>
+                                    </strong>
+                                </span>
+                                <span>
+                                    <strong>분석</strong>
+                                    <strong>
+                                        <i [bgIcon]="'dashboard'" [size]="24"></i>
+                                    </strong>
+                                </span>
+                                <span>
+                                    <strong>현황테이블</strong>
+                                    <strong>
+                                        <i [bgIcon]="'table'" [size]="24"></i>
+                                    </strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
     <section style="display: none;">
         <div class="create-modal" #createModal>
             <ng-container *ngIf="!success">
@@ -111,11 +155,14 @@
                         [controlerName]="'to'" [inputType]="'date'" [titleText]="'To'" [required]="true"></app-input>
                     <app-input [parentGroup]="taskForm" [controlerName]="'description'" [titleText]="'Description'">
                     </app-input>
+                    <app-input [parentGroup]="taskForm" [controlerName]="'description'" [inputType]="'number'" [titleIcon]="['outline', 'hourglass']" [titleText]="'Survey time (m)'">
+                    </app-input>
                     <app-input [error]="!!errorList.taskType" [errorTitle]="errorText?.taskType || ''"
                         [parentGroup]="taskForm" [radioValue]="taskType" [inputType]="'radio'"
                         [controlerName]="'taskType'" [titleText]="'Survey type'" [required]="true">
                     </app-input>
                 </form>
+                <br />
             </ng-container>
             <ng-container *ngIf="success">
                 <section class="success-page">

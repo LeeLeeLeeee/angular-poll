@@ -9,7 +9,10 @@ import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { SurveyComponent } from './survey/survey.component';
+import { LogicComponent } from './survey/logic/logic.component';
+import { ToolComponent } from './survey/tool/tool.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -19,12 +22,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     AddComponent,
     EditComponent,
+    SurveyComponent,
+    LogicComponent,
+    ToolComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(ProjectRoutes),
+    NgxChartsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
 
   ]
 })

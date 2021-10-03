@@ -1,11 +1,11 @@
-
+@import '/src/assets/scss/variable.scss';
 
 .full-background {
     width: 100%;
     height: 100%;
     background-color: #fff;
     display: flex;
-    font-family: "En-Noto", Arial, Helvetica, sans-serif;
+    font-family: "AppleSDGothicNeo", Arial, Helvetica, sans-serif;
     font-weight: 600;
 }
 
@@ -13,10 +13,13 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    
 }
 
 .main-content-wrapper {
-    padding: .5em;
     flex:1;
-    height: 1px
+    height: 1px;
+    display: flex;
+    justify-content: center;
+    background-color: $bg-color;
 }

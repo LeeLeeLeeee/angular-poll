@@ -30,14 +30,14 @@
 .input-wrapper {
     display: flex;
     color: #565656;
-    font-family: "Kr-Noto", "En-Noto", Arial, Helvetica, sans-serif;
+    font-family: "AppleSDGothicNeo", Arial, Helvetica, sans-serif;
     flex-direction: column;
     position: relative;
     .required-sign {
         position: absolute;
         width: 0px;
         height: 0px;
-        transform: translate(-3px, 1px);
+        transform: translate(-5px, -1px);
         border-top:3px solid #e84615;
         border-left:3px solid #e84615;
         border-right:3px solid transparent;
@@ -57,13 +57,13 @@
         
         & .popup {
             &::after, &::before {
-                background-color: $text-danger !important;
+                background-color: $color-danger !important;
                 color:white
             }
         }
 
         & .error-icon {
-            color: $text-danger !important;
+            color: $color-danger !important;
             animation: reveal .1s ease-in-out 0s forwards;
         }
     }
@@ -78,7 +78,7 @@
         justify-content: space-between;
         align-items: center;
         font-family: inherit;
-
+        background-color: $color-white;
         &.fix-height {
             height:2.5em;
         }
@@ -96,7 +96,7 @@
         }
 
         &.error {
-            border: 1px solid $text-danger;
+            border: 1px solid $color-danger;
         }
 
 
@@ -154,7 +154,7 @@
             & > li {
                 display: flex;
                 flex-direction: row;
-                border: 1px solid $text-light;
+                border: 1px solid $color-light;
                 margin: .25em 0px;
                 padding: .25em;
                 align-items: center;
@@ -163,7 +163,7 @@
                 border-radius: .2em;
 
                 &:hover {
-                    background-color: $text-light;
+                    background-color: $color-light;
                 }
                 & > label {
                     flex: 1;

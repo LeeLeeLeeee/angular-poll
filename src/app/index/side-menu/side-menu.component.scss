@@ -32,9 +32,9 @@ $border-color: #32324e;
     padding: .5em;
     align-items: center;
     transition: .25s ease-in;
-
+    font-size: 16px;
     &.on {
-        width: 200px;
+        width: 166px;
         transition: .25s ease-out;
     }
 
@@ -61,6 +61,7 @@ $border-color: #32324e;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
+            line-height: 21px;
         }
 
         & > div.active {
@@ -73,7 +74,8 @@ $border-color: #32324e;
      
         & > div > i {
              color: $icon-color;
-             font-size: 21.25px;
+             font-size: 16px;
+             height: 22px;
              margin-right: 5px
         }
     }

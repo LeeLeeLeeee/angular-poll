@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { keyable } from 'src/app/shared/interface/keyable-interface';
+import { lineChartDataset } from 'src/app/shared/interface/chart-interface';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { ProjectService } from 'src/app/shared/services/project.service';
 import { TaskService } from 'src/app/shared/services/task.service';
 import { taskForm } from '../project.component';
+import { projectForm } from '../project.component';
+import { LayoutService } from 'src/app/shared/services/layout.service';
 
 @Component({
   selector: 'app-detail',
@@ -28,21 +30,40 @@ export class DetailComponent implements OnInit, AfterViewInit {
     {label : "Banner survey", value: "1"},
     {label : "List survey", value: "2"}
   ]
+  filter : keyable = {
+    taskTitle: ''
+  }
   success : boolean = false;
+  selectedTaskId : string = '';
+  targetProjectInfo : projectForm;
+  dailyAccessUser : lineChartDataset[];
 
   @ViewChild("createModal") createModal : ElementRef;
   @ViewChild("deleteModal") deleteModal : ElementRef;
 
   constructor(
     private taskService: TaskService,
+    private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
     private modalService : ModalService,
+    private layoutService : LayoutService,
     private fb : FormBuilder
   ) {
     this.taskForm = this.fb.group({})
     this.projectId = this.route.snapshot.params.id;
-
+    this.dailyAccessUser = [
+      {
+        name: 'user',
+        series: [
+          {name: '09-21', value: 20},
+          {name: '09-22', value: 13},
+          {name: '09-23', value: 15},
+          {name: '09-24', value: 25},
+          {name: '09-25', value: 30},
+        ]
+      }
+    ]
   }
 
   tbyi(id, item) {
@@ -51,6 +72,10 @@ export class DetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.projectService.getOne(this.projectId).then((res : projectForm) => {
+      this.targetProjectInfo = res
+    })
+
     this.getTaskList();
   }
 
@@ -65,7 +90,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
   getTaskList() {
     if (!!(this.projectId)) {
       this.taskService
-        .select(this.projectId)
+        .select(this.projectId, this.filter)
         .then((data) => {
           this.tasks = data.taskList;
           const tasksStatics = this.tasks.reduce((prev, cur) => {
@@ -158,9 +183,9 @@ export class DetailComponent implements OnInit, AfterViewInit {
   }
 
   deleteTask(e : MouseEvent) {
-    this.taskService.delete()
+    this.taskService.delete(this.selectedTaskId)
     .then((value) => {
-      this.taskService.id = '';
+      this.selectedTaskId = '';
       this.modalService.hide('delete', {isWrapper: true})
       this.getTaskList();
     })
@@ -169,12 +194,29 @@ export class DetailComponent implements OnInit, AfterViewInit {
     })
   }
 
+  searchTask(e : KeyboardEvent) {
+    if (e.key === 'Enter') {
+      const target = this.layoutService.convertEventToElement(e as Event);
+      this.filter.taskTitle = (target as HTMLInputElement).value;
+      this.getTaskList();
+    }
+  }
+
+  clearTask() {
+    this.filter.taskTitle = '';
+    this.getTaskList();
+  }
+
   openDeleteModal(id : string) {
-    this.taskService.id = id;
+    this.selectedTaskId = id;
     this.modalService.show('delete', {isWrapper: true})
   }
 
   backToProject() {
     this.router.navigate(['project'])
+  }
+
+  goToSurvey(taskId : string) {
+    this.router.navigate(['project', this.projectId, taskId])
   }
 }

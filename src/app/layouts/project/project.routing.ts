@@ -4,6 +4,7 @@ import { DetailComponent } from "./detail/detail.component";
 import { EditComponent } from "./edit/edit.component";
 import { ListComponent } from "./list/list.component";
 import { ProjectComponent } from "./project.component";
+import { SurveyComponent } from "./survey/survey.component";
 
 
 export const ProjectRoutes: Routes = [
@@ -22,6 +23,10 @@ export const ProjectRoutes: Routes = [
       {
         path:":id",
         component:DetailComponent
+      },
+      {
+        path:":projectId/:taskId",
+        component:SurveyComponent
       }
     ]
   },

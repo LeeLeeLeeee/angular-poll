@@ -10,29 +10,23 @@ import restApi from '../interface/restApi-interface';
   providedIn: 'root',
 })
 export class ProjectService implements restApi {
-  private _projectId : string = "";
 
   constructor(private httpClient: HttpClient) {}
 
-  
-  get id() {
-    return this._projectId
-  }
 
-  set id(id : string) {
-    this._projectId = id;
-  }
-
+  getOne<T>(projectId : string): Promise<T> {
+    return this.httpClient.get<T>(`${environment.apiAddres}/v1/project/${projectId}`, {
+      withCredentials: true,
+    }).toPromise();
+  } 
 
   select<T>(pageInfo?: any): Promise<any> {
     const params = new HttpParams({ fromObject: pageInfo });
 
-    return this.httpClient
-      .get<T>(`${environment.apiAddres}/v1/project`, {
+    return this.httpClient.get<T>(`${environment.apiAddres}/v1/project`, {
         withCredentials: true,
         params,
-      })
-      .toPromise();
+      }).toPromise();
   }
 
   create<T>(projectForm: T): Observable<T> {
@@ -45,10 +39,10 @@ export class ProjectService implements restApi {
     );
   }
 
-  delete(): Promise<any> {
-    if( this._projectId !== "") {
+  delete(id : string): Promise<any> {
+    if( id !== "") {
       return this.httpClient
-      .delete(`${environment.apiAddres}/v1/project/${this._projectId}`, {
+      .delete(`${environment.apiAddres}/v1/project/${id}`, {
         withCredentials: true,
       })
       .pipe(

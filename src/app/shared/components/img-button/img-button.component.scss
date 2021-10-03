@@ -1,0 +1,76 @@
+@import '/src/assets/scss/variable.scss';
+
+:host {
+    width: 2.2em;
+    height: 2.2em;
+    display: inline-block;
+    margin-right: .2em;
+    // font-size: .9em;
+}
+
+:host(.sm) {
+    width: 1.7em;
+    height: 1.7em;
+    // font-size: .8em;
+}
+
+:host(.md) {
+    width: 2.2em;
+    height: 2.2em;
+    // font-size: .9em;
+}
+
+:host(.lg) {
+    width: 3em;
+    height: 3em;
+    // font-size: 1em;
+}
+
+span {
+    border: 1px solid $color-secondary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .2em;
+    
+    cursor: pointer;
+    transition: box-shadow .2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0px 3px 4px -3px black;
+    }
+
+    &.white {
+        background-color: $color-white;
+    }
+
+    &.primary {
+        background-color: $color-primary;
+        color:white;
+    }
+
+    &.danger {
+        background-color: $color-danger;
+        color:white;
+    }
+
+    &.sm {
+        width: 1.7em;
+        height: 1.7em;
+    }
+
+    &.md {
+        width: 2.2em;
+        height: 2.2em;
+    }
+
+    &.lg {
+        width: 3em;
+        height: 3em;
+    }
+
+    & > i { position: relative; margin: 0px}
+    & > i::before {
+        @include absolute-center()
+    }
+}

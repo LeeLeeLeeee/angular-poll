@@ -6,14 +6,14 @@
 <div class="project-wrapper">
     <section>
         <div>
-            <button class="ui labeled icon button teal h100 shadow-sm" (click)="goToAdd()">
+            <button class="ui labeled icon button primary h100 shadow-sm" (click)="goToAdd()">
                 <i class="plus icon"></i>
                 Add Project
             </button>
             <div class="ui large icon input shadow-sm search-input"
                 [ngClass]="filter.projectTitle == '' ? 'search' : 'close' ">
                 <input type="text" placeholder="Search to title" [value]="filter.projectTitle"
-                    (keyup)="projectSelect($event)">
+                    (keyup)="searchProject($event)">
                 <i class="search icon link"></i>
                 <i (click)="clearProject()" class="close icon link"></i>
             </div>

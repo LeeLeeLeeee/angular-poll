@@ -1,0 +1,32 @@
+@import '/src/assets/scss/variable.scss';
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+:host {
+    & ::ng-deep app-img-button {
+        margin:0px !important;   
+        & > span {
+            
+            border-radius: 0px;
+        }
+
+    }
+
+    & ::ng-deep app-img-button:first-child {
+        & > span { border-right:0px !important; border-radius: .2em 0px 0px .2em; }
+    }
+
+    & ::ng-deep app-img-button:last-child {
+        & > span { border-left:0px !important; border-radius: 0px .2em .2em 0px }
+    }
+
+    & ::ng-deep app-img-button:nth-child(2) {
+        & > span { border-left:1px solid $color-secondary !important; border-radius: 0px .2em .2em 0px }
+    }
+
+}

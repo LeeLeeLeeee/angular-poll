@@ -8,7 +8,7 @@
     grid-template-rows: 1fr 2fr 2fr 2fr 1fr;
     -ms-grid-row: 1fr 2fr 2fr 2fr 1fr;
     height: 100%;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: .125em;
     &.success > section:nth-child(1) {
         display: none;
@@ -97,4 +97,8 @@
         }
         
     }
+}
+
+.create-form {
+    background-color: $color-white;
 }
