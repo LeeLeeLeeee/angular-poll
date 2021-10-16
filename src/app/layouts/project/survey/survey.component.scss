@@ -5,7 +5,7 @@
     flex: 1;
     display: flex;
     height: 100%;
-    font-size: 16px;
+    font-size: 14px;
     & i {
         position: relative;
         &::before {
@@ -14,228 +14,229 @@
     }
 }
 
+.icon-box {
+    background-color: $color-light;
+    border:1px solid $color-gray;
+    transition: background-color .2s ease-in-out;
+    cursor: pointer;
+    &.md {
+        border-radius: 5px;
+        width: 26px !important;
+        height: 26px !important;
+    }
+
+    &.active {
+        background-color: #EEFBF5;
+        border:1px solid #5CC0A3;
+    }
+
+    &:not(.active) {
+        &:hover {
+            background-color: #eef6ff;
+        }
+    }
+    
+}
+
 .survey-wrapper {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    font-weight: 500;
+    flex: 1;
     & > .survey-header {
-        height: 3em;
-        border-bottom: 1px solid $color-secondary;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        & > .tool-type {
-            flex: 1 1 0px;
-            border-right: 1px solid $color-secondary;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            background-color: $color-white;
-            align-self: stretch;
+        margin-left: 8px;
+        & > div:nth-child(1) {
+            display: inline-flex;
+            height: 30px;
             align-items: center;
-            & > a {
-                background-color: $color-white;
-                padding: 0px 1em;
-                border-radius: 4px;
-                height: auto;
-                flex: 1;
-                margin:.3em;
-                text-align: center;
-                height: 30px;
-                line-height: 30px;
-                color: $color-dark;
-                font-weight: 600;
-                &.active {
-                    background-color: #e8fff5;
-                }
+            cursor: pointer;
+            margin-left: 8px;
+            & > span:nth-child(2) {
+                margin-left: 5px;
+                margin-top: 1px;
             }
         }
-        
-            
-        & > .tool-header {
-            flex: 5 5 0px;
-            & > div {
-                margin-left:.3em; 
-                display: flex;
-                flex-direction: row;
-            }
-        }
-        
-        
     }
 
     & > .survey-body {
-        flex: 1 1 0px;
         display: flex;
-        flex-direction: row;
-        font-size: .9em;
-
+        flex: 1;
+        height: 100%;
+        padding-left:8px;
+        padding-bottom:16px;
+        align-items: stretch;
+        overflow: hidden;
         & > .question-list {
-            flex: 1 1 0px;
-            border-right: 1px solid $color-secondary;
             display: flex;
             flex-direction: column;
-            background-color: white;
-            & > .question-top {
+            height: 100%;
+            border-radius: 15px;
+            width: 308px;
+            & > .question-list-header {
                 display: flex;
-                flex-direction: row;
-                align-items: center;
-                border-bottom: 1px solid $color-secondary;
-                height: 3em;
-                padding:.5em;
-            }
-
-            & > .question-header {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                border-bottom: 1px solid $color-secondary;
-                height: 2.2em;
-                
-                & > div { height: 100%; display: flex; flex-direction: row; align-items: center; }
+                height: 48px;
+                border-bottom: 1px solid $color-light;
+                justify-content: space-between;
+                align-items: flex-end;
+                padding-left: 8px;
+                padding-bottom: 8px;
+                padding-right: 8px;
 
                 & > div:nth-child(1) {
-                    width: 2.5em;
-                    border-right: 1px solid $color-secondary;
-                    position: relative;
-                    justify-content: center;
-                    & > input {
-                        font-size: 1.3em;
-                        transform: scale(1.2);
-                        @include absolute-center()
-                    }
+                    font-size: 16px;
                 }
 
                 & > div:nth-child(2) {
-                    width: 3em;
-                    border-right: 1px solid $color-secondary;
-                    justify-content: center;
+                    display: flex;
+                    align-items: flex-end;
+                    & > i:not(:last-child) {
+                        margin-right: 13px;
+                    }
                 }
-
-                & > div:nth-child(3) {
-                    flex: 6;
-                    padding-left: .52em;
-                }
-
-                & > div:nth-child(4), & > div:nth-child(5) {
-                    justify-content: center;
-                    flex: 1;
-                    color:$color-secondary;
-                }
-                
             }
 
-            & > .question-body {
-                display: flex;
-                flex-direction: column;
-                flex:1 1 0px;
-                
+            & > .question-list-body {
+                flex:1;
+                height: 100%;
+                overflow: auto;
+                position: relative;
 
-                & > div {
+                & > div:not(:last-child) {
+                    border-bottom: 1px solid $color-light;
+                }
+
+                & > .add-box {
+                    position: sticky;
+                    top:0px;
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
+                    height: 90px;
                     align-items: center;
-                    height : 30px;
-                    border-bottom: 1px solid $color-secondary; 
+                    justify-content: center;
+                    transition: background-color .2s ease-in-out;
                     cursor: pointer;
-                    position: relative;
-                    z-index: 2;
-                    & > .target-icon {
-                        color:$color-primary;
-                        position: absolute;
-                        right: -40px;
-                        top:50%;
-                        transform: translate(-50%, -50%);
-                        opacity: 0;
-                        transition: opacity .2s ease-out;
+                    z-index: 999;
+                    & > span {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 36px;
+                        height: 36px;
+                        border: 2px dotted $color-primary;
+                        
+                    }
+                    & > div {
+                        margin-top: 3px;
+                        color:$color-gray
+                    }
+
+                    &:hover {
+                        background-color: #eef6ff;
                     }
                 }
 
-
-
-                & > div.active {
-                    background-color: #e8fff5;
-
-                    & > .target-icon {
-                        display: inline-block;
-                        opacity: 1;
-                    }
-                }
-
-                & > div:not(.active):hover {
-                    & > .target-icon {
-                        display: inline-block;
-                        opacity: 1;
-                    }
-                }
-
-                & > div > div {
-                    align-self: stretch;
-                    line-height: 30px;
-                }
-
-                & > div > div:nth-child(1) {
-                    width: 2.5em;
-                    border-right: 1px solid $color-secondary;
-                    position: relative;
-                    justify-content: center;
-                    align-self: stretch;
-                    & > input {
-                        font-size: 1.3em;
-                        transform: scale(1.2);
-                        @include absolute-center()
-                    }
-                }
-
-                & > div > div:nth-child(2) {
-                    width: 3em;
-                    border-right: 1px solid $color-secondary;
-                    justify-content: center;
+                & > .question-list-item {
                     display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 90px;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    cursor: pointer;
+
+                    &.active {
+                        background-color: #F6FBF5;
+                    }
+
+                    & > .item-header {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-top:6px;
+                        & > div:nth-child(1) {
+                            display: flex;
+                            height:18px;
+                            align-items: flex-start;
+                            & > input {
+                                margin-right: 5px;
+                            }
+
+                            & span {
+                                line-height: 18px;
+                            }
+                        }
+
+                        & > div {
+                            & > i:not(:last-child) {
+                                margin-right: 6px;
+                            }
+                        }
+                        
+                    }
+
+                    & > .item-content {
+                        padding-top:2px;
+                        font-weight: 400;
+                        line-height: 0.9;
+                        height: 32px;
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: pre-wrap;
+                    }
+
+                    & > .item-date {
+                        font-size: 12px;
+                        height: 17px;
+                        font-weight: 400;
+                        color:$color-gray
+                    }
+
+                    &:hover{
+                        background-color: #eef6ff;
+                    }
                     
-                    &.type-attr {
-                        background-color: #0ede9142;
-                    }
 
-                    &.type-single {
-                        background-color: #d5de0e42;
-                    }
-                    
-                    &.type-multi {
-                        background-color: #0e9fde42;
-                    }
-
-                    &.type-rank {
-                        background-color: #de0e4c42;
-                    }
-
-                    &.type-text {
-                        background-color: #4fde0e42;
-                    }
-                }
-
-                & > div > div:nth-child(3) {
-                    flex: 6;
-                    padding-left: .52em;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    max-width: 160px;
-                }
-
-                & > div > div:nth-child(4), & > div > div:nth-child(5) {
-                    justify-content: center;
-                    flex: 1;
-                    color:$color-secondary;
                 }
             }
         }
 
         & > .survey-content {
-            flex: 5 5 0px;
             display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex: 1;
+            border-radius: 15px;
+            margin-left:8px;
+            margin-right: 16px;
+            
+            & > .header {
+                display: flex;
+                justify-content: center;
+                height: 48px;
+                align-items: center;
+                border-bottom: 1px solid $color-light;
+                
+                & > ul {
+                    display: inline-flex;
+                    list-style: none;
+                    margin:0px;
+                    padding: 0px;
+                    height: 100%;
+                    width: calc(90px * 3);
+                    font-size: 18px;
+                    & > li {
+                        flex:1;
+                        text-align: center;
+                        line-height: 48px;
+                        border-bottom: 2px solid $color-dark;
+                        cursor: pointer;
+                        &.active {
+                            background-color: #F5F9FB;
+                            color:$color-primary;
+                            border-color: $color-primary;
+                        }
+                    }
+                }
+            }
         }
-
     }
+    
 }

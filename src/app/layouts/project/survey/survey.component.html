@@ -1,90 +1,77 @@
 <section class="survey-wrapper">
     <div class="survey-header">
-        <div class="tool-type">
-            <a class="shadow-border active" href="#">문항</a>
-            <a class="shadow-border" href="#">로직</a>
-            <a class="shadow-border" href="#">테스트</a>
+        <div>
+            <i [bgIcon]="'leftArrow'" [size]="10" [color]="'dark'"></i><span>Back to task</span>
         </div>
-        <div class="tool-header">
-            <div>
-
-                <app-img-button [toolTip]="'미리보기'" [iconName]="'eye slash'"></app-img-button>
-                <app-img-button-list>
-                    <app-img-button [toolTip]="'되돌리기'" [iconName]="'undo'"></app-img-button>
-                    <app-img-button [toolTip]="'다시하기'" [iconName]="'redo'"></app-img-button>
-                </app-img-button-list>
-                
-            </div>
-        </div>   
     </div>
     <div class="survey-body">
-        <div class="question-list">
-            <div class="question-top">
-                <app-select [placeHolder]="'문항 타입을 선택해주세요'" [options]="questionFilter"></app-select>
-            </div>
-            <div class="question-header">
+        <div class="question-list white bg shadow-border">
+            <div class="question-list-header">
                 <div>
-                    <input type="checkbox">
+                    Question List
                 </div>
                 <div>
-                    ID
-                </div>
-                <div>
-                    Name
-                </div>
-                <div>
-                    <i class="search icon"></i>
-                </div>
-                <div>
-                    <i class="sort icon"></i>
+                    <i class="icon-box md" [bgIcon]="'check'" [size]="20"></i>
+                    <i class="icon-box md" [ngClass]="{'active':true}" [color]="'active'" [bgIcon]="'sort'" [height]="20" [size]="15"></i>
+                    <i class="icon-box md" [bgIcon]="'filter'" [size]="20"></i>
+                    <i class="icon-box md" [bgIcon]="'search'" [size]="20"></i>
                 </div>
             </div>
-            <div class="question-body">
-                <ng-container *ngFor="let item of questionList; let i = index">
-                    <div [ngClass]="i === 0 && 'active'">
-                        <div>
-                            <input type="checkbox">
+            <div class="question-list-body app-scroll">
+                <div class="add-box bg white">
+                    <span>
+                        <i [bgIcon]="'plus'" [size]="16" [color]="'primary'"></i>
+                    </span>
+                    <div>문항 추가</div>
+                </div>
+                <ng-container *ngFor="let question of questionList; let i = index; trackBy: trackById">
+                    <div class="question-list-item" [ngClass]="{'active': i === 1}">
+                        <div class="item-header">
+                            <div>
+                                <input type="checkbox">
+                                <span>
+                                    Q1. (단수 문항)
+                                </span>
+                                
+                            </div>
+                            <div>
+                                <i [bgIcon]="'grab'" [color]="'dark'" [size]="18"></i>
+                                <i [bgIcon]="'copy'" [color]="'dark'" [size]="18"></i>
+                                <i [bgIcon]="'star'" [color]="'dark'" [size]="18"></i>
+                                <i [bgIcon]="'delete'" [color]="'danger'" [size]="18"></i>
+                            </div>
                         </div>
-                        <ng-container [ngSwitch]="i">
-                            <div class="type-attr" *ngSwitchCase="0">
-                                <span>0000</span>
-                            </div>
-                            <div class="type-single" *ngSwitchCase="1">
-                                <span>0001</span>
-                            </div>
-                            <div class="type-multi" *ngSwitchCase="2">
-                                <span>0002</span>
-                            </div>
-                            <div class="type-rank" *ngSwitchCase="3">
-                                <span>0003</span>
-                            </div>
-                            <div class="type-text" *ngSwitchCase="4">
-                                <span>0004</span>
-                            </div>
-                            <div class="type-attr" *ngSwitchCase="5">
-                                <span>0005</span>
-                            </div>
-                        </ng-container>
-                        <div>
-                            Somthing Titlexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        <div class="item-content app-scroll">
+                            {{
+                                "문1-1. 그럼, 평생교육바우처 지원을 받기 이전, 평생교육 강좌를 수강하지 않은 주된 이유는 무엇입니까? \n문1-1. 그럼, 평생교육바우처 지원을 받기 이전, 평생교육 강좌를 수강하지 않은 주된 이유는 무엇입니까?"
+                            }}
                         </div>
-                        <i class="hand paper outline icon"></i>
-                        <i class="trash alternate outline icon"></i>
-                        <!-- <i class="star outline icon target-icon"></i> -->
+                        <div class="item-date">
+                            마지막 업데이트: 2021.09.22 19:22
+                        </div>
                     </div>
                 </ng-container>
-                
             </div>
         </div>
-        <div class="survey-content" [ngSwitch]="innreMenu">
-            <ng-container *ngSwitchCase="'logic'">
-                <app-logic></app-logic>
+        <div class="survey-content shadow-border white bg" [ngSwitch]="innreMenu">
+            <div class="header">
+                <ul>
+                    <li class="active">문항</li>
+                    <li>테스트</li>
+                    <li>쿼터</li>
+                </ul>
+            </div>
+            <ng-container *ngSwitchCase="'question'">
+                <app-question></app-question>
             </ng-container>
-            <ng-container *ngSwitchCase="'tool'">
-                <app-tool></app-tool>
+            <ng-container *ngSwitchCase="'test'">
+                <app-test-question></app-test-question>
+            </ng-container>
+            <ng-container *ngSwitchCase="'quota'">
+                <app-quota></app-quota>
             </ng-container>
             <ng-container *ngSwitchDefault>
-                <app-tool></app-tool>
+                <app-question></app-question>
             </ng-container>
         </div>
     </div>

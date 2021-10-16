@@ -188,7 +188,7 @@ body > .wrapper{
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #5e5e5e;
+        background-color: #5e5e5eaa;
     }
 
     &::-webkit-scrollbar-track {
@@ -242,21 +242,22 @@ body > .wrapper{
 }
 
 .white {
-    .bg {
+    
+    &.bg {
         background-color: $color-white;
     }
 
-    .text {
+    &.text {
         color: $color-white;
     }
 }
 
 .black {
-    .bg {
+    &.bg {
         background-color: black;
     }
 
-    .text {
+    &.text {
         color: black;
     }
 }

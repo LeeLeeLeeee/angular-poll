@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ContentChildren, ElementRef, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { keyable } from '../../interface/keyable-interface';
 import { DateService } from '../../services/date.service';
@@ -10,17 +10,33 @@ import { DateService } from '../../services/date.service';
 })
 export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestroy {
   isCalendarOn : boolean = false;
-  calendarInfo : keyable = {};
   isMonth : boolean = false;
   isYear : boolean = false;
+
+  monthList : number[] = Array(12).fill('').map((_, i) => i + 1);
+  yearList : string[] = []
+  blanckDateStart : string[] = []
+  blanckDateLast : string[] = []
+  realDate : number[] = []
   selectedDate : string = '';
+
+  
   @ContentChild('hiddenInput') inputEle : ElementRef;
   @ViewChild('calendarBody') calendarElement : ElementRef;
+
   @Input('parentForm') parenrForm : FormGroup;
+  @Input('calendarInfo') calendarInfo : keyable;
 
   constructor(private dateService : DateService, private render : Renderer2) {
-    this.calendarInfo = this.dateService.calendarInfo;
+    this.calendarInfo = {...this.dateService.calendarInfo};
+    this.yearList = [
+      ...Array(10).fill('').map((_, i) => this.calendarInfo.year - ( 10 - i) ),
+      ...Array(10).fill('').map((_, i) => this.calendarInfo.year + ( i) )
+    ]
+    this.updateDate()
   }
+
+  
 
   ngOnInit(): void {
     document.body.addEventListener('click', (event : Event)=> {
@@ -30,7 +46,9 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
           this.toggleCalendar()
         }
       }
-    })
+    });
+
+    
    
   }
 
@@ -41,18 +59,20 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
   }
 
   ngOnDestroy() : void {
-
+  
   }
 
-  blanckDateStart() {
+
+  getBlanckDateStart() {
     return Array(this.calendarInfo.firstDate).fill('')
   }
 
-  realDate() {
+  getRealDate() {
+    console.log('-----')
     return Array(this.calendarInfo.totalDate).fill('').map((_, i) => i+1);
   }
 
-  blanckDateLast() {
+  getBlanckDateLast() {
     return Array(7 - this.calendarInfo.lastDay).fill('')
   }
 
@@ -62,17 +82,6 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
 
   choiceYear(e : MouseEvent) {
     this.isYear = !this.isYear
-  }
-
-  monthList() {
-    return Array(12).fill('').map((_, i) => i + 1)
-  }
-
-  yearList() {
-    return [
-      ...Array(10).fill('').map((_, i) => this.calendarInfo.year - ( 10 - i) ),
-      ...Array(10).fill('').map((_, i) => this.calendarInfo.year + ( i) )
-    ]
   }
 
   toggleCalendar() {
@@ -88,12 +97,24 @@ export class CalendarInputComponent implements OnInit, AfterContentInit, OnDestr
 
   changeMonth(month) {
     this.dateService.month = month;
-    this.calendarInfo = this.dateService.calendarInfo
+    this.calendarInfo = {...this.dateService.calendarInfo}
+    this.updateDate();
   }
 
   changeYear(year) {
     this.dateService.year = year;
-    this.calendarInfo = this.dateService.calendarInfo
+    this.calendarInfo = {...this.dateService.calendarInfo}
+    this.yearList = [
+      ...Array(10).fill('').map((_, i) => this.calendarInfo.year - ( 10 - i) ),
+      ...Array(10).fill('').map((_, i) => this.calendarInfo.year + ( i) )
+    ]
+    this.updateDate();
+  }
+
+  updateDate() {
+    this.blanckDateStart = this.getBlanckDateLast();
+    this.blanckDateLast = this.getBlanckDateStart();
+    this.realDate = this.getRealDate();
   }
 
   checkToday(date) : boolean {

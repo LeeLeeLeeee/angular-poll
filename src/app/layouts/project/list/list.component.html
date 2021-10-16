@@ -11,7 +11,7 @@
                 Add Project
             </button>
             <div class="ui large icon input shadow-sm search-input"
-                [ngClass]="filter.projectTitle == '' ? 'search' : 'close' ">
+                [ngClass]="filter.projectTitle === '' ? 'search' : 'close' ">
                 <input type="text" placeholder="Search to title" [value]="filter.projectTitle"
                     (keyup)="searchProject($event)">
                 <i class="search icon link"></i>

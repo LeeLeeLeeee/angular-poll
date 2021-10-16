@@ -21,12 +21,10 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        & > i {
-            margin-left: 8px;
-            margin-right: 8px
-        }
+        
         & > span:nth-child(2) {
-            margin-top: 8px;
+            margin-left: 5px;
+            margin-top: 1px;
         }
     }
 
@@ -216,6 +214,7 @@
                                 height: 58px;
                                 justify-content: center;
                                 align-self: flex-end;
+                                align-items: center;
                                 flex-direction: column;
                                 position: relative;
                                 cursor: pointer;
@@ -308,8 +307,6 @@
          & div {
             margin-bottom: 1em;
         }
-
-    
 
         & > i {
             width:50px;

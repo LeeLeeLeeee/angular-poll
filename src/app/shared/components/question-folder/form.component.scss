@@ -1,0 +1,53 @@
+@import '/src/assets/scss/variable.scss';
+
+.form {
+    display: flex;
+    height: 140px;
+    border-bottom: 1px solid $color-light;
+    position: relative;
+    
+    &.active {
+        &::before {
+            content:'';
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            left:0px;
+            background-color: $color-primary;
+        }
+    }
+
+    & > div:nth-child(1) {
+        width: 135px;
+        border-right: 1px solid $color-light;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        writing-mode: vertical-lr;
+        font-size: 16px;
+        position: relative;
+        &.required {
+            color:$color-primary;
+
+            & > .title {
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    left:-6px;
+                    top:-6px;
+                    background-color: $color-danger;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        & > i.reset {
+            position: absolute !important;
+            top:6px;
+            right:6px;
+        }
+    }
+}

@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { ToggleComponent } from './components/toggle/toggle.component';
@@ -17,6 +16,9 @@ import { ImgButtonComponent } from './components/img-button/img-button.component
 import { ImgButtonListComponent } from './components/img-button-list/img-button-list.component';
 import { SelectComponent } from './components/select/select.component';
 import { IconDirective } from './directive/icon.directive';
+import { ToggleBoxDirective } from './directive/toggle-box.directive';
+import { TitleFormComponent } from './components/question-folder/title-form/title-form.component';
+import { ExampleFormComponent } from './components/question-folder/example-form/example-form.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,9 @@ import { IconDirective } from './directive/icon.directive';
     ImgButtonListComponent,
     SelectComponent,
     IconDirective,
+    ToggleBoxDirective,
+    TitleFormComponent,
+    ExampleFormComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +52,10 @@ import { IconDirective } from './directive/icon.directive';
     ImgButtonListComponent,
     SelectComponent,
     MonthPipe,
-    IconDirective
+    IconDirective,
+    ToggleBoxDirective,
+    TitleFormComponent,
+    ExampleFormComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[

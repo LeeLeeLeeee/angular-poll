@@ -10,9 +10,11 @@ import { EditComponent } from './edit/edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SurveyComponent } from './survey/survey.component';
-import { LogicComponent } from './survey/logic/logic.component';
-import { ToolComponent } from './survey/tool/tool.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { QuestionComponent } from './survey/question/question.component';
+import { TestQuestionComponent } from './survey/test-question/test-question.component';
+import { QuotaComponent } from './survey/quota/quota.component';
+import { SingleComponent, SingleOptionComponent } from './survey/question/single/single.component';
 
 
 @NgModule({
@@ -23,8 +25,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AddComponent,
     EditComponent,
     SurveyComponent,
-    LogicComponent,
-    ToolComponent,
+    QuestionComponent,
+    TestQuestionComponent,
+    QuotaComponent,
+    SingleComponent,
+    SingleOptionComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +37,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxChartsModule,
     SharedModule,
     ReactiveFormsModule,
-    
-
-  ]
+  ],
 })
 export class ProjectModule { }

@@ -16,7 +16,7 @@ export class SurveyComponent implements OnInit {
   
   innreMenu : string = "tool"
   questionFilter : OptionType[] = []
-  questionList : number[] = [1, 2, 3, 4, 5, 6 ]
+  questionList : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 1, 1, 1, 1 ]
   constructor(private route: ActivatedRoute) {
     this.projectId = this.route.snapshot.params.projectId;
     this.taskId = this.route.snapshot.params.taskId;
@@ -49,6 +49,10 @@ export class SurveyComponent implements OnInit {
   
   set taskId(id : string) {
     this._taskId = id
+  }
+
+  trackById(item: any): any {
+    return item;
   }
 
 }
