@@ -261,3 +261,19 @@ body > .wrapper{
         color: black;
     }
 }
+
+
+.ck-ediotr-box {
+    & .ck-editor {
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+        & > .ck-editor__main {
+            flex: 1;
+            display: flex;
+            & > .ck-content {
+                flex: 1;
+            }
+        }
+    }
+}

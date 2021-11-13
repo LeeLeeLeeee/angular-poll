@@ -1,9 +1,11 @@
-<div class="form active">
+<div class="form active ck-ediotr-box">
     <div class="required">
-        <i class="reset" [bgIcon]="'reset'" [size]="18"></i>
+        <i class="reset" (click)="onResetTitle()" [bgIcon]="'reset'" [size]="18"></i>
         <span class="title">
             질문
         </span>
     </div>
-    <div></div>
+    <div>
+        <ckeditor #editor (change)="onChange($event)" [editor]="Editor" (ready)="onReady($event)"></ckeditor>
+    </div>
 </div>

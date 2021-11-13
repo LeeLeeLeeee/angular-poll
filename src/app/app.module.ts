@@ -1,4 +1,4 @@
-import { NgModule, TemplateRef } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, TemplateRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,7 +14,6 @@ import { AnalysisComponent } from './layouts/analysis/analysis.component';
 import { ScheduleComponent } from './layouts/schedule/schedule.component';
 import { TaskManageComponent } from './layouts/task-manage/task-manage.component';
 import { ProjectModule } from './layouts/project/project.module';
-import { ProjectComponent } from './layouts/project/project.component';
 
 
 @NgModule({
@@ -24,7 +23,6 @@ import { ProjectComponent } from './layouts/project/project.component';
     AnalysisComponent,
     ScheduleComponent,
     TaskManageComponent,
-    
   ],
   imports: [
     AppRoutingModule,
@@ -36,7 +34,7 @@ import { ProjectComponent } from './layouts/project/project.component';
     HttpClientModule,
     SignModule,
     BrowserAnimationsModule,
-    ProjectModule
+    ProjectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

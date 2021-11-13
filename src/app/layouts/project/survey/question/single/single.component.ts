@@ -8,12 +8,21 @@ import Question from '../question.class';
 })
 export class SingleComponent implements OnInit {
   @Input() question: Question;
+  
+  
   constructor() {
     
   }
 
   ngOnInit(): void {
       
+  }
+
+  setTitle(title: string): void {
+    this.question.setQuestionItem({
+      ...this.question.getQuestionItem(),
+      title: title
+    })
   }
 
 }
@@ -28,6 +37,7 @@ export class SingleOptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

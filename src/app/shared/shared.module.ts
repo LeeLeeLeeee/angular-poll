@@ -19,6 +19,8 @@ import { IconDirective } from './directive/icon.directive';
 import { ToggleBoxDirective } from './directive/toggle-box.directive';
 import { TitleFormComponent } from './components/question-folder/title-form/title-form.component';
 import { ExampleFormComponent } from './components/question-folder/example-form/example-form.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { ExampleFormComponent } from './components/question-folder/example-form/
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CKEditorModule,
+    KeyboardShortcutsModule.forRoot()
   ],
   exports: [
     ToggleComponent,

@@ -21,7 +21,7 @@ export class AddComponent implements OnInit, AfterViewInit {
     private router : Router,
   ) { 
     this.projectForm = this.fb.group({})
-    this.projectForm
+    
 
   }
 

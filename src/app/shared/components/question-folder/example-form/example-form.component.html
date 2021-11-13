@@ -1,9 +1,26 @@
-<div class="form">
+<ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+<div class="form" >
     <div class="required">
-        <i class="reset" [bgIcon]="'reset'" [size]="18"></i>
+        <i (click)="onClickResetExample()" class="reset" [bgIcon]="'reset'" [size]="18"></i>
         <span class="title">
             보기
         </span>
     </div>
-    <div></div>
+    <div>
+        <form class="example-form" [formGroup]="exampleForm">
+            <ng-container [formArrayName]="'item'" *ngFor="let item of items.controls; let i = index">
+                <div>
+                    <span> 
+                        <b>{{ ('0' + (i + 1)).substring(0, 3) }}</b>
+                    </span>
+                    <input [ngClass]="{'duplicated': duplicatedList.includes(item.value)}" [attr.data-id]="i" autocomplete="off" #exampleRef class="shadow-sm" id="alias-{{i}}" [formControlName]="i"/>
+                    <i class="shadow-sm" [size]="20"[bgIcon]="'up'" (click)="onClickLowerEvent(i)" [ngClass]="{'disabled': i === 0}"></i>
+                    <i class="shadow-sm" [size]="20"[bgIcon]="'down'" (click)="onClickHigherEvent(i)" [ngClass]="{'disabled': i === (items.length - 1)}"></i>
+                    <i class="shadow-sm" [size]="20"[bgIcon]="'media'"></i>
+                    <i class="shadow-sm" [size]="20"[bgIcon]="'plus'" (click)="onClickAddExampleEvent(i)" ></i>
+                    <i class="shadow-sm" [size]="20"[bgIcon]="'close'" (click)="onClickDeleteExampleEvent(i)"></i>
+                </div>
+            </ng-container>
+        </form>
+    </div> 
 </div>
